@@ -111,7 +111,7 @@ class BookTableViewController: UITableViewController {
             }
             
             let selectedMeal = meals[indexPath.row]
-            mealDetailViewController.meal = selectedMeal
+            mealDetailViewController.book = selectedMeal
             
         default:
             fatalError("Unexpected Segue Identifier; \(String(describing: segue.identifier))")
@@ -122,7 +122,7 @@ class BookTableViewController: UITableViewController {
     //MARK: Actions
     
     @IBAction func unwindToMealList(sender: UIStoryboardSegue) {
-        if let sourceViewController = sender.source as? BookViewController, let meal = sourceViewController.meal {
+        if let sourceViewController = sender.source as? BookViewController, let meal = sourceViewController.book {
             
             if let selectedIndexPath = tableView.indexPathForSelectedRow {
                 // Update an existing meal.

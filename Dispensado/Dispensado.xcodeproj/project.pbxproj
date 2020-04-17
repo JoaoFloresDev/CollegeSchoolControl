@@ -28,7 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		936B4B7E1DB54E8F0090E3EE /* Faltô.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Faltô.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		936B4B7E1DB54E8F0090E3EE /* Dispensado.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dispensado.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		936B4B811DB54E8F0090E3EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		936B4B831DB54E8F0090E3EE /* BookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookViewController.swift; sourceTree = "<group>"; };
 		936B4B861DB54E8F0090E3EE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -70,7 +70,7 @@
 		936B4B7F1DB54E8F0090E3EE /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				936B4B7E1DB54E8F0090E3EE /* Faltô.app */,
+				936B4B7E1DB54E8F0090E3EE /* Dispensado.app */,
 				936B4B921DB54E8F0090E3EE /* DispensadoTests.xctest */,
 			);
 			name = Products;
@@ -109,7 +109,7 @@
 			);
 			name = Dispensado;
 			productName = FoodTracker;
-			productReference = 936B4B7E1DB54E8F0090E3EE /* Faltô.app */;
+			productReference = 936B4B7E1DB54E8F0090E3EE /* Dispensado.app */;
 			productType = "com.apple.product-type.application";
 		};
 		936B4B911DB54E8F0090E3EE /* DispensadoTests */ = {
@@ -341,13 +341,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = NZC6LC8NWM;
 				INFOPLIST_FILE = Dispensado/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 3;
-				PRODUCT_BUNDLE_IDENTIFIER = joaoFlores.Faltometro;
-				PRODUCT_NAME = "Faltô";
+				MARKETING_VERSION = 4;
+				PRODUCT_BUNDLE_IDENTIFIER = joaoFlores.Dispensado;
+				PRODUCT_NAME = Dispensado;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -357,13 +357,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = NZC6LC8NWM;
 				INFOPLIST_FILE = Dispensado/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 3;
-				PRODUCT_BUNDLE_IDENTIFIER = joaoFlores.Faltometro;
-				PRODUCT_NAME = "Faltô";
+				MARKETING_VERSION = 4;
+				PRODUCT_BUNDLE_IDENTIFIER = joaoFlores.Dispensado;
+				PRODUCT_NAME = Dispensado;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

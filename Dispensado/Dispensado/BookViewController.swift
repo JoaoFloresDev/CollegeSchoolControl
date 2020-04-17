@@ -28,7 +28,7 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
     var currentMiss = 0
     var maxMiss = 0
     
-    var meal: BookClass?
+    var book: BookClass?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,7 +53,7 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
         obsTextView.delegate = self as? UITextViewDelegate
         nameTextField.delegate = self
         
-        if let meal = meal {
+        if let meal = book {
             navigationItem.title = meal.name
             nameTextField.text = meal.name
             photoImageView.image = meal.photo
@@ -148,7 +148,7 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
         let observations = obsTextView.text ?? ""
         maxMiss = Int(Double(lessons ?? 0) * 4.5)
         
-        meal = BookClass(name: name, photo: photo, currentMiss: currentMiss, maxMiss: maxMiss, lessons: lessons ?? 0, observations: observations)
+        book = BookClass(name: name, photo: photo, currentMiss: currentMiss, maxMiss: maxMiss, lessons: lessons ?? 0, observations: observations)
     }
     
     //MARK: Actions
@@ -165,8 +165,10 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
     }
     
     @IBAction func subMiss(_ sender: Any) {
-        currentMiss = currentMiss - 1
-        missTextField.text = "\(currentMiss) / \(maxMiss)"
+        if(currentMiss > 0) {
+            currentMiss = currentMiss - 1
+            missTextField.text = "\(currentMiss) / \(maxMiss)"
+        }
     }
     
     @IBAction func addMiss(_ sender: Any) {
@@ -183,7 +185,7 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
     @objc func dismissKeyboardFunc() {
         maxMiss = Int(Double(Int(lessonsTextField.text ?? "0") ?? 0) * 4.5)
         
-        if let meal = meal {
+        if let meal = book {
             missTextField.text = "\(currentMiss) / \(maxMiss)"
         }
         
