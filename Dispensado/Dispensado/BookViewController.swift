@@ -36,17 +36,10 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
             overrideUserInterfaceStyle = .light
         }
         
-        if(UserDefaults.standard.integer(forKey: "noFirstUse") > 5) {
-            self.rateApp()
-            UserDefaults.standard.set (0, forKey: "noFirstUse")
-        } else {
-            UserDefaults.standard.set (UserDefaults.standard.integer(forKey: "noFirstUse") + 1, forKey: "noFirstUse")
-        }
-        
         obsTextView.layer.cornerRadius = 10
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: Selector(("dismissKeyboardFunc")))
-
+        
         
         view.addGestureRecognizer(tap)
         
@@ -73,13 +66,6 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
         updateSaveButtonState()
     }
     
-    func rateApp() {
-        if #available(iOS 10.3, *) {
-
-            SKStoreReviewController.requestReview()
-        }
-    }
-    
     //MARK: UITextFieldDelegate
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
@@ -87,10 +73,6 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
-        if(textField == lessonsTextField) {
-            print("esse mesmo")
-        }
         
         textField.resignFirstResponder()
         return true
@@ -106,19 +88,32 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
         dismiss(animated: true, completion: nil)
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+//
+//        guard let selectedImage = info[UIImagePickerControllerOriginalImage] as? UIImage else {
+//            fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
+//        }
+//
+//        photoImageView.image = selectedImage
+//
+//        dismiss(animated: true, completion: nil)
+//    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
-        guard let selectedImage = info[UIImagePickerControllerOriginalImage] as? UIImage else {
-            fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
-        }
+        var image : UIImage!
         
-        photoImageView.image = selectedImage
+        if let img = info[UIImagePickerController.InfoKey.editedImage] as? UIImage
+        {   image = img    }
+        else if let img = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
+        {   image = img    }
+        
+        photoImageView.image = image
         
         dismiss(animated: true, completion: nil)
     }
     
     //MARK: Navigation
-    
     @IBAction func cancel(_ sender: UIBarButtonItem) {
         let isPresentingInAddMealMode = presentingViewController is UINavigationController
         
@@ -154,14 +149,21 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
     //MARK: Actions
     @IBAction func selectImageFromPhotoLibrary(_ sender: UITapGestureRecognizer) {
         
-        nameTextField.resignFirstResponder()
+//        nameTextField.resignFirstResponder()
+//
+//        let imagePickerController = UIImagePickerController()
+//
+//        imagePickerController.sourceType = .photoLibrary
+//
+//        imagePickerController.delegate = self
+//        present(imagePickerController, animated: true, completion: nil)
         
-        let imagePickerController = UIImagePickerController()
+        let imagePicker =  UIImagePickerController()
+        imagePicker.allowsEditing = true
+        imagePicker.delegate = self
+        imagePicker.sourceType = .photoLibrary
         
-        imagePickerController.sourceType = .photoLibrary
-        
-        imagePickerController.delegate = self
-        present(imagePickerController, animated: true, completion: nil)
+        present(imagePicker, animated: true, completion: nil)
     }
     
     @IBAction func subMiss(_ sender: Any) {
@@ -185,7 +187,7 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
     @objc func dismissKeyboardFunc() {
         maxMiss = Int(Double(Int(lessonsTextField.text ?? "0") ?? 0) * 4.5)
         
-        if let meal = book {
+        if book != nil {
             missTextField.text = "\(currentMiss) / \(maxMiss)"
         }
         
