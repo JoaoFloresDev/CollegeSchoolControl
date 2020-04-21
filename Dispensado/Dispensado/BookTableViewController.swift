@@ -1,9 +1,9 @@
 //
-//  MealTableViewController.swift
+//  BookTableViewController.swift
 //  Dispensado
 //
-//  Created by Joao Flores on 01/12/19.
-//  Copyright © 2019 Joao Flores. All rights reserved.
+//  Created by Joao Flores on 20/04/20.
+//  Copyright © 2020 Joao Flores. All rights reserved.
 //
 
 import UIKit
@@ -14,7 +14,7 @@ class BookTableViewController: UITableViewController {
     
     //MARK: Properties
     
-    var meals = [BookClass]()
+    var books = [BookClass]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,12 +22,12 @@ class BookTableViewController: UITableViewController {
             overrideUserInterfaceStyle = .light
         } else {
             // Fallback on earlier versions
-        }  
+        }
         // Use the edit button item provided by the table view controller.
         navigationItem.leftBarButtonItem = editButtonItem
         
-        if let savedMeals = loadMeals() {
-            meals += savedMeals
+        if let savedBooks = loadBooks() {
+            books += savedBooks
         }
     }
 
@@ -42,7 +42,7 @@ class BookTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return meals.count
+        return books.count
     }
 
     
@@ -54,12 +54,13 @@ class BookTableViewController: UITableViewController {
             fatalError("The dequeued cell is not an instance of MealTableViewCell.")
         }
         
-        let meal = meals[indexPath.row]
+        let meal = books[indexPath.row]
         
         cell.nameLabel.text = meal.name
         cell.photoImageView.image = meal.photo
         cell.missLabel.text = "\(meal.currentMiss) / \(meal.maxMiss)"
     
+        cell.cropBounds(viewlayer: cell.photoImageView.layer, cornerRadius: 10)
         return cell
     }
     
@@ -77,12 +78,12 @@ class BookTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
-            meals.remove(at: indexPath.row)
-            saveMeals()
+            books.remove(at: indexPath.row)
+            saveBooks()
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        }
     }
 
     
@@ -111,7 +112,7 @@ class BookTableViewController: UITableViewController {
                 fatalError("The selected cell is not being displayed by the table")
             }
             
-            let selectedMeal = meals[indexPath.row]
+            let selectedMeal = books[indexPath.row]
             mealDetailViewController.book = selectedMeal
             
         default:
@@ -122,39 +123,38 @@ class BookTableViewController: UITableViewController {
     
     //MARK: Actions
     
-    @IBAction func unwindToMealList(sender: UIStoryboardSegue) {
+    @IBAction func unwindToBookList(sender: UIStoryboardSegue) {
         if let sourceViewController = sender.source as? BookViewController, let meal = sourceViewController.book {
             
             if let selectedIndexPath = tableView.indexPathForSelectedRow {
                 // Update an existing meal.
-                meals[selectedIndexPath.row] = meal
+                books[selectedIndexPath.row] = meal
                 tableView.reloadRows(at: [selectedIndexPath], with: .none)
             }
             else {
                 // Add a new meal.
-                let newIndexPath = IndexPath(row: meals.count, section: 0)
+                let newIndexPath = IndexPath(row: books.count, section: 0)
                 
-                meals.append(meal)
+                books.append(meal)
                 tableView.insertRows(at: [newIndexPath], with: .automatic)
             }
             
-            // Save the meals.
-            saveMeals()
+            saveBooks()
         }
     }
     
     //MARK: Private Methods
     
-    private func saveMeals() {
-        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(meals, toFile: BookClass.ArchiveURL.path)
+    private func saveBooks() {
+        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(books, toFile: BookClass.ArchiveURL.path)
         if isSuccessfulSave {
-            os_log("Meals successfully saved.", log: OSLog.default, type: .debug)
+            os_log("Successfully saved.", log: OSLog.default, type: .debug)
         } else {
-            os_log("Failed to save meals...", log: OSLog.default, type: .error)
+            os_log("Failed to save...", log: OSLog.default, type: .error)
         }
     }
     
-    private func loadMeals() -> [BookClass]?  {
+    private func loadBooks() -> [BookClass]?  {
         return NSKeyedUnarchiver.unarchiveObject(withFile: BookClass.ArchiveURL.path) as? [BookClass]
     }
 

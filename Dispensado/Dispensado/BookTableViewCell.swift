@@ -1,9 +1,9 @@
 //
-//  MealTableViewCell.swift
+//  BookTableViewCell.swift
 //  Dispensado
 //
-//  Created by Joao Flores on 01/12/19.
-//  Copyright © 2019 Joao Flores. All rights reserved.
+//  Created by Joao Flores on 20/04/20.
+//  Copyright © 2020 Joao Flores. All rights reserved.
 //
 
 import UIKit
@@ -26,4 +26,11 @@ class BookTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    func cropBounds(viewlayer: CALayer, cornerRadius: Float) {
+        
+        let imageLayer = viewlayer
+        imageLayer.cornerRadius = CGFloat(cornerRadius)
+        imageLayer.masksToBounds = true
+    }
 }
+

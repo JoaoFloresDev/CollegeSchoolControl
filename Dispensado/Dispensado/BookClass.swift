@@ -1,5 +1,5 @@
 //
-//  Meal.swift
+//  BookClass.swift
 //  Dispensado
 //
 //  Created by Joao Flores on 01/12/19.
@@ -23,7 +23,7 @@ class BookClass: NSObject, NSCoding {
     
     //MARK: Archiving Paths
     static let DocumentsDirectory = FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!
-    static let ArchiveURL = DocumentsDirectory.appendingPathComponent("meals")
+    static let ArchiveURL = DocumentsDirectory.appendingPathComponent("books")
     
     //MARK: Types
     
@@ -78,16 +78,15 @@ class BookClass: NSObject, NSCoding {
         
         // The name is required. If we cannot decode a name string, the initializer should fail.
         guard let name = aDecoder.decodeObject(forKey: PropertyKey.name) as? String else {
-            os_log("Unable to decode the name for a Meal object.", log: OSLog.default, type: .debug)
+            os_log("Unable to decode the name for a Book object.", log: OSLog.default, type: .debug)
             return nil
         }
         
         guard let observations = aDecoder.decodeObject(forKey: PropertyKey.observations) as? String else {
-            os_log("Unable to decode the name for a Meal object. OBS", log: OSLog.default, type: .debug)
+            os_log("Unable to decode the name for a Book object. OBS", log: OSLog.default, type: .debug)
             return nil
         }
         
-        // Because photo is an optional property of Meal, just use conditional cast.
         let photo = aDecoder.decodeObject(forKey: PropertyKey.photo) as? UIImage
         
         let currentMiss = aDecoder.decodeInteger(forKey: PropertyKey.currentMiss)

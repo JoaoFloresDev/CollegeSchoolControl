@@ -46,24 +46,33 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
         obsTextView.delegate = self as? UITextViewDelegate
         nameTextField.delegate = self
         
-        if let meal = book {
-            navigationItem.title = meal.name
-            nameTextField.text = meal.name
-            photoImageView.image = meal.photo
+        if let bookControll = book {
+            navigationItem.title = bookControll.name
+            nameTextField.text = bookControll.name
+            photoImageView.image = bookControll.photo
             
-            missTextField.text = "\(meal.currentMiss) / \(meal.maxMiss)"
+            missTextField.text = "\(bookControll.currentMiss) / \(bookControll.maxMiss)"
             
-            currentMiss = meal.currentMiss
-            maxMiss = meal.maxMiss
+            currentMiss = bookControll.currentMiss
+            maxMiss = bookControll.maxMiss
             
-            lessonsTextField.text = String(meal.lessons)
-            obsTextView.text = meal.observations
+            lessonsTextField.text = String(bookControll.lessons)
+            obsTextView.text = bookControll.observations
             missesState.alpha = 1
         } else {
             missesState.alpha = 0
         }
         
         updateSaveButtonState()
+        
+        cropBounds(viewlayer: photoImageView.layer, cornerRadius: 10)
+    }
+    
+    func cropBounds(viewlayer: CALayer, cornerRadius: Float) {
+        
+        let imageLayer = viewlayer
+        imageLayer.cornerRadius = CGFloat(cornerRadius)
+        imageLayer.masksToBounds = true
     }
     
     //MARK: UITextFieldDelegate
@@ -88,17 +97,6 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
         dismiss(animated: true, completion: nil)
     }
     
-//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-//
-//        guard let selectedImage = info[UIImagePickerControllerOriginalImage] as? UIImage else {
-//            fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
-//        }
-//
-//        photoImageView.image = selectedImage
-//
-//        dismiss(animated: true, completion: nil)
-//    }
-    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         var image : UIImage!
@@ -115,16 +113,13 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
     
     //MARK: Navigation
     @IBAction func cancel(_ sender: UIBarButtonItem) {
-        let isPresentingInAddMealMode = presentingViewController is UINavigationController
+        let isPresentingInAddBookMode = presentingViewController is UINavigationController
         
-        if isPresentingInAddMealMode {
+        if isPresentingInAddBookMode {
             dismiss(animated: true, completion: nil)
         }
         else if let owningNavigationController = navigationController{
             owningNavigationController.popViewController(animated: true)
-        }
-        else {
-            fatalError("The MealViewController is not inside a navigation controller.")
         }
     }
     
@@ -148,15 +143,6 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
     
     //MARK: Actions
     @IBAction func selectImageFromPhotoLibrary(_ sender: UITapGestureRecognizer) {
-        
-//        nameTextField.resignFirstResponder()
-//
-//        let imagePickerController = UIImagePickerController()
-//
-//        imagePickerController.sourceType = .photoLibrary
-//
-//        imagePickerController.delegate = self
-//        present(imagePickerController, animated: true, completion: nil)
         
         let imagePicker =  UIImagePickerController()
         imagePicker.allowsEditing = true
