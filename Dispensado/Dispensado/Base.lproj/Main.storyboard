@@ -23,8 +23,9 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo.on.rectangle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="g02-AR-8ZE">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IconPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="g02-AR-8ZE">
                                             <rect key="frame" x="5" y="10" width="40" height="40"/>
+                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="g02-AR-8ZE" secondAttribute="height" multiplier="1:1" id="hd1-T3-XVt"/>
                                             </constraints>
@@ -79,7 +80,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7TU-8y-tbk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="180" y="824"/>
+            <point key="canvasLocation" x="179.71014492753625" y="823.66071428571422"/>
         </scene>
         <!--Nova Matéria-->
         <scene sceneID="uf2-q1-A8x">
@@ -108,7 +109,7 @@
                                                 <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES"/>
                                             </textView>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Nome da disciplina" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="lVI-i2-vxD" userLabel="Name Text Field">
-                                                <rect key="frame" x="110" y="20" width="294" height="37"/>
+                                                <rect key="frame" x="92" y="20" width="312" height="37"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="37" id="hOM-5k-64V"/>
                                                 </constraints>
@@ -124,8 +125,9 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="320" image="photo.on.rectangle" catalog="system" highlightedImage="person" translatesAutoresizingMaskIntoConstraints="NO" id="2ZD-Zx-Opt">
-                                                <rect key="frame" x="10" y="20" width="90" height="90"/>
+                                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="320" image="IconPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="2ZD-Zx-Opt">
+                                                <rect key="frame" x="10" y="20" width="72" height="72"/>
+                                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <gestureRecognizers/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="2ZD-Zx-Opt" secondAttribute="height" multiplier="1:1" id="AuK-m4-YVT"/>
@@ -166,7 +168,7 @@
                                                             <action selector="addMiss:" destination="d1f-Vf-Z6B" eventType="touchUpInside" id="snI-2p-pcN"/>
                                                         </connections>
                                                     </button>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="faltas / máx. horas permitidas" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uok-39-pC5">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="máx. horas ausente" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uok-39-pC5">
                                                         <rect key="frame" x="10" y="5" width="194" height="17"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <nil key="textColor"/>
@@ -191,14 +193,14 @@
                                                 </constraints>
                                             </view>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Horas por semana (créditos)" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="iCF-Wp-JeI">
-                                                <rect key="frame" x="110" y="67" width="294" height="37"/>
+                                                <rect key="frame" x="92" y="67" width="312" height="37"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="37" id="fCy-Ti-jlF"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad" keyboardAppearance="alert" returnKeyType="done"/>
                                             </textField>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="App icon made by Iconixar from www.flaticon.com  All icons made by Freepik from www.flaticon.com" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XeG-FS-QXs">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="App icon made by Iconixar from www.flaticon.com  School vector created by freepik - www.freepik.com" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XeG-FS-QXs">
                                                 <rect key="frame" x="10" y="740" width="394" height="50"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <nil key="textColor"/>
@@ -283,7 +285,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1965" y="824"/>
+            <point key="canvasLocation" x="1963.7681159420292" y="823.66071428571422"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="dPx-cK-pq0">
@@ -323,9 +325,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="IconPlaceholder" width="167" height="167"/>
         <image name="minus.circle" catalog="system" width="64" height="60"/>
-        <image name="person" catalog="system" width="64" height="58"/>
-        <image name="photo.on.rectangle" catalog="system" width="64" height="48"/>
         <image name="plus.circle" catalog="system" width="64" height="60"/>
     </resources>
     <inferredMetricsTieBreakers>

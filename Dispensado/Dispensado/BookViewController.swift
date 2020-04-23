@@ -162,6 +162,9 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
     @IBAction func addMiss(_ sender: Any) {
         currentMiss = currentMiss + 1
         missTextField.text = "\(currentMiss) / \(maxMiss)"
+        if #available(iOS 10.3, *) {
+            SKStoreReviewController.requestReview()
+        }
     }
     //MARK: Private Methods
     
