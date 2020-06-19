@@ -3,12 +3,19 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		7F1D06A05C7EE9C153C4CE7D /* Pods_College_CollegeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 728CCAEBF33286A964F7F2C9 /* Pods_College_CollegeUITests.framework */; };
 		89AE27E773ADA0F642B11FAE /* Pods_College.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B979786293A61E819C9A8C0 /* Pods_College.framework */; };
+		C42190F0249C6ECC00C8668C /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42190EB249C6ECA00C8668C /* ProductCell.swift */; };
+		C42190F1249C6ECC00C8668C /* RazeFaceProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42190EC249C6ECB00C8668C /* RazeFaceProducts.swift */; };
+		C42190F2249C6ECC00C8668C /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42190ED249C6ECB00C8668C /* DetailViewController.swift */; };
+		C42190F3249C6ECC00C8668C /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42190EE249C6ECB00C8668C /* Calculator.swift */; };
+		C42190F4249C6ECC00C8668C /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42190EF249C6ECC00C8668C /* IAPHelper.swift */; };
+		C42190F7249C6EFB00C8668C /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42190F5249C6EFA00C8668C /* WelcomeViewController.swift */; };
+		C42190F8249C6EFB00C8668C /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42190F6249C6EFA00C8668C /* MasterViewController.swift */; };
 		C44C7098249C52C600EC1E85 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C44C7097249C52C600EC1E85 /* StoreKit.framework */; };
 		C465621F244E4E4E00BE0B61 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C465621E244E4E4E00BE0B61 /* AppDelegate.swift */; };
 		C4656226244E4E4E00BE0B61 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4656224244E4E4E00BE0B61 /* Main.storyboard */; };
@@ -49,6 +56,13 @@
 		593205C9F9A17ABE2A031969 /* Pods-CollegeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollegeTests.debug.xcconfig"; path = "Target Support Files/Pods-CollegeTests/Pods-CollegeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		728CCAEBF33286A964F7F2C9 /* Pods_College_CollegeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_College_CollegeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A49CAE68556E48FA97FBE204 /* Pods-CollegeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollegeTests.release.xcconfig"; path = "Target Support Files/Pods-CollegeTests/Pods-CollegeTests.release.xcconfig"; sourceTree = "<group>"; };
+		C42190EB249C6ECA00C8668C /* ProductCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductCell.swift; sourceTree = "<group>"; };
+		C42190EC249C6ECB00C8668C /* RazeFaceProducts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RazeFaceProducts.swift; sourceTree = "<group>"; };
+		C42190ED249C6ECB00C8668C /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		C42190EE249C6ECB00C8668C /* Calculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Calculator.swift; sourceTree = "<group>"; };
+		C42190EF249C6ECC00C8668C /* IAPHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAPHelper.swift; sourceTree = "<group>"; };
+		C42190F5249C6EFA00C8668C /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		C42190F6249C6EFA00C8668C /* MasterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
 		C44C7097249C52C600EC1E85 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		C465621B244E4E4E00BE0B61 /* College.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = College.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C465621E244E4E4E00BE0B61 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -112,8 +126,21 @@
 				593205C9F9A17ABE2A031969 /* Pods-CollegeTests.debug.xcconfig */,
 				A49CAE68556E48FA97FBE204 /* Pods-CollegeTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		C42190EA249C6EBB00C8668C /* Purchase */ = {
+			isa = PBXGroup;
+			children = (
+				C42190F6249C6EFA00C8668C /* MasterViewController.swift */,
+				C42190F5249C6EFA00C8668C /* WelcomeViewController.swift */,
+				C42190EE249C6ECB00C8668C /* Calculator.swift */,
+				C42190ED249C6ECB00C8668C /* DetailViewController.swift */,
+				C42190EF249C6ECC00C8668C /* IAPHelper.swift */,
+				C42190EB249C6ECA00C8668C /* ProductCell.swift */,
+				C42190EC249C6ECB00C8668C /* RazeFaceProducts.swift */,
+			);
+			path = Purchase;
 			sourceTree = "<group>";
 		};
 		C44C7096249C52C600EC1E85 /* Frameworks */ = {
@@ -130,6 +157,7 @@
 		C4656212244E4E4E00BE0B61 = {
 			isa = PBXGroup;
 			children = (
+				C42190EA249C6EBB00C8668C /* Purchase */,
 				C465621D244E4E4E00BE0B61 /* Dispensado */,
 				C4656237244E4E4F00BE0B61 /* DispensadoTests */,
 				C4656242244E4E4F00BE0B61 /* DispensadoUITests */,
@@ -427,9 +455,16 @@
 				C4656229244E4E4E00BE0B61 /* Dispensado.xcdatamodeld in Sources */,
 				C4656299244E505000BE0B61 /* SceneDelegate.swift in Sources */,
 				C4656252244E4EB200BE0B61 /* BookViewController.swift in Sources */,
+				C42190F3249C6ECC00C8668C /* Calculator.swift in Sources */,
+				C42190F4249C6ECC00C8668C /* IAPHelper.swift in Sources */,
 				C4656254244E4ED500BE0B61 /* BookClass.swift in Sources */,
+				C42190F7249C6EFB00C8668C /* WelcomeViewController.swift in Sources */,
 				C465621F244E4E4E00BE0B61 /* AppDelegate.swift in Sources */,
+				C42190F0249C6ECC00C8668C /* ProductCell.swift in Sources */,
 				C4656256244E4EFD00BE0B61 /* BookTableViewCell.swift in Sources */,
+				C42190F2249C6ECC00C8668C /* DetailViewController.swift in Sources */,
+				C42190F1249C6ECC00C8668C /* RazeFaceProducts.swift in Sources */,
+				C42190F8249C6EFB00C8668C /* MasterViewController.swift in Sources */,
 				C4656258244E4F3600BE0B61 /* BookTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -605,7 +640,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = NZC6LC8NWM;
 				INFOPLIST_FILE = Dispensado/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -613,7 +648,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4;
+				MARKETING_VERSION = 5;
 				PRODUCT_BUNDLE_IDENTIFIER = joaoFlores.dispensado;
 				PRODUCT_NAME = College;
 				SWIFT_VERSION = 5.0;
@@ -627,7 +662,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = NZC6LC8NWM;
 				INFOPLIST_FILE = Dispensado/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -635,7 +670,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4;
+				MARKETING_VERSION = 5;
 				PRODUCT_BUNDLE_IDENTIFIER = joaoFlores.dispensado;
 				PRODUCT_NAME = College;
 				SWIFT_VERSION = 5.0;

@@ -48,6 +48,8 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        UserDefaults.standard.set(true, forKey:"FirtsUse")
+        
         if #available(iOS 13.0, *) {
             overrideUserInterfaceStyle = .light
         }
@@ -163,6 +165,10 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
         maxMiss = Int(Double(lessons ?? 0))
         
         book = BookClass(name: name, photo: photo, currentMiss: currentMiss, maxMiss: maxMiss, lessons: lessons ?? 0, observations: observations)
+        
+        if #available(iOS 10.3, *) {
+            SKStoreReviewController.requestReview()
+        }
     }
     
     //MARK: - Actions
@@ -200,7 +206,10 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
             missTextField.textColor = UIColor.black
         }
         
-        if interstitial.isReady && firstAdd {
+        if(RazeFaceProducts.store.isProductPurchased("NoAds.College") || (UserDefaults.standard.object(forKey: "NoAds.College") != nil)) {
+            print("comprado")
+        }
+        else if interstitial.isReady && firstAdd {
           interstitial.present(fromRootViewController: self)
             firstAdd = false
         }

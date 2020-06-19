@@ -123,7 +123,7 @@ class BookTableViewController: UITableViewController {
             mealDetailViewController.book = selectedMeal
             
         default:
-            fatalError("Unexpected Segue Identifier; \(String(describing: segue.identifier))")
+            print("Vai compra heheeee")
         }
     }
 
