@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C44C7098249C52C600EC1E85 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C44C7097249C52C600EC1E85 /* StoreKit.framework */; };
 		C465621F244E4E4E00BE0B61 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C465621E244E4E4E00BE0B61 /* AppDelegate.swift */; };
 		C4656226244E4E4E00BE0B61 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4656224244E4E4E00BE0B61 /* Main.storyboard */; };
 		C4656229244E4E4E00BE0B61 /* Dispensado.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C4656227244E4E4E00BE0B61 /* Dispensado.xcdatamodeld */; };
@@ -39,17 +40,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		C465621B244E4E4E00BE0B61 /* Dispensado.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dispensado.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C44C7097249C52C600EC1E85 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		C465621B244E4E4E00BE0B61 /* College.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = College.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C465621E244E4E4E00BE0B61 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C4656225244E4E4E00BE0B61 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C4656228244E4E4E00BE0B61 /* Dispensado.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Dispensado.xcdatamodel; sourceTree = "<group>"; };
 		C465622A244E4E4F00BE0B61 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C465622D244E4E4F00BE0B61 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C465622F244E4E4F00BE0B61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C4656234244E4E4F00BE0B61 /* DispensadoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DispensadoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C4656234244E4E4F00BE0B61 /* CollegeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CollegeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4656238244E4E4F00BE0B61 /* DispensadoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispensadoTests.swift; sourceTree = "<group>"; };
 		C465623A244E4E4F00BE0B61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C465623F244E4E4F00BE0B61 /* DispensadoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DispensadoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C465623F244E4E4F00BE0B61 /* CollegeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CollegeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4656243244E4E4F00BE0B61 /* DispensadoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispensadoUITests.swift; sourceTree = "<group>"; };
 		C4656245244E4E4F00BE0B61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C4656251244E4EB200BE0B61 /* BookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookViewController.swift; sourceTree = "<group>"; };
@@ -64,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C44C7098249C52C600EC1E85 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,6 +87,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C44C7096249C52C600EC1E85 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C44C7097249C52C600EC1E85 /* StoreKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		C4656212244E4E4E00BE0B61 = {
 			isa = PBXGroup;
 			children = (
@@ -91,15 +102,16 @@
 				C4656237244E4E4F00BE0B61 /* DispensadoTests */,
 				C4656242244E4E4F00BE0B61 /* DispensadoUITests */,
 				C465621C244E4E4E00BE0B61 /* Products */,
+				C44C7096249C52C600EC1E85 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
 		C465621C244E4E4E00BE0B61 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C465621B244E4E4E00BE0B61 /* Dispensado.app */,
-				C4656234244E4E4F00BE0B61 /* DispensadoTests.xctest */,
-				C465623F244E4E4F00BE0B61 /* DispensadoUITests.xctest */,
+				C465621B244E4E4E00BE0B61 /* College.app */,
+				C4656234244E4E4F00BE0B61 /* CollegeTests.xctest */,
+				C465623F244E4E4F00BE0B61 /* CollegeUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -143,9 +155,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		C465621A244E4E4E00BE0B61 /* Dispensado */ = {
+		C465621A244E4E4E00BE0B61 /* College */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C4656248244E4E4F00BE0B61 /* Build configuration list for PBXNativeTarget "Dispensado" */;
+			buildConfigurationList = C4656248244E4E4F00BE0B61 /* Build configuration list for PBXNativeTarget "College" */;
 			buildPhases = (
 				C4656217244E4E4E00BE0B61 /* Sources */,
 				C4656218244E4E4E00BE0B61 /* Frameworks */,
@@ -155,14 +167,14 @@
 			);
 			dependencies = (
 			);
-			name = Dispensado;
+			name = College;
 			productName = Dispensado;
-			productReference = C465621B244E4E4E00BE0B61 /* Dispensado.app */;
+			productReference = C465621B244E4E4E00BE0B61 /* College.app */;
 			productType = "com.apple.product-type.application";
 		};
-		C4656233244E4E4F00BE0B61 /* DispensadoTests */ = {
+		C4656233244E4E4F00BE0B61 /* CollegeTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C465624B244E4E4F00BE0B61 /* Build configuration list for PBXNativeTarget "DispensadoTests" */;
+			buildConfigurationList = C465624B244E4E4F00BE0B61 /* Build configuration list for PBXNativeTarget "CollegeTests" */;
 			buildPhases = (
 				C4656230244E4E4F00BE0B61 /* Sources */,
 				C4656231244E4E4F00BE0B61 /* Frameworks */,
@@ -173,14 +185,14 @@
 			dependencies = (
 				C4656236244E4E4F00BE0B61 /* PBXTargetDependency */,
 			);
-			name = DispensadoTests;
+			name = CollegeTests;
 			productName = DispensadoTests;
-			productReference = C4656234244E4E4F00BE0B61 /* DispensadoTests.xctest */;
+			productReference = C4656234244E4E4F00BE0B61 /* CollegeTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		C465623E244E4E4F00BE0B61 /* DispensadoUITests */ = {
+		C465623E244E4E4F00BE0B61 /* CollegeUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C465624E244E4E4F00BE0B61 /* Build configuration list for PBXNativeTarget "DispensadoUITests" */;
+			buildConfigurationList = C465624E244E4E4F00BE0B61 /* Build configuration list for PBXNativeTarget "CollegeUITests" */;
 			buildPhases = (
 				C465623B244E4E4F00BE0B61 /* Sources */,
 				C465623C244E4E4F00BE0B61 /* Frameworks */,
@@ -191,9 +203,9 @@
 			dependencies = (
 				C4656241244E4E4F00BE0B61 /* PBXTargetDependency */,
 			);
-			name = DispensadoUITests;
+			name = CollegeUITests;
 			productName = DispensadoUITests;
-			productReference = C465623F244E4E4F00BE0B61 /* DispensadoUITests.xctest */;
+			productReference = C465623F244E4E4F00BE0B61 /* CollegeUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -219,7 +231,7 @@
 					};
 				};
 			};
-			buildConfigurationList = C4656216244E4E4E00BE0B61 /* Build configuration list for PBXProject "Dispensado" */;
+			buildConfigurationList = C4656216244E4E4E00BE0B61 /* Build configuration list for PBXProject "College" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -232,9 +244,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				C465621A244E4E4E00BE0B61 /* Dispensado */,
-				C4656233244E4E4F00BE0B61 /* DispensadoTests */,
-				C465623E244E4E4F00BE0B61 /* DispensadoUITests */,
+				C465621A244E4E4E00BE0B61 /* College */,
+				C4656233244E4E4F00BE0B61 /* CollegeTests */,
+				C465623E244E4E4F00BE0B61 /* CollegeUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -302,12 +314,12 @@
 /* Begin PBXTargetDependency section */
 		C4656236244E4E4F00BE0B61 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = C465621A244E4E4E00BE0B61 /* Dispensado */;
+			target = C465621A244E4E4E00BE0B61 /* College */;
 			targetProxy = C4656235244E4E4F00BE0B61 /* PBXContainerItemProxy */;
 		};
 		C4656241244E4E4F00BE0B61 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = C465621A244E4E4E00BE0B61 /* Dispensado */;
+			target = C465621A244E4E4E00BE0B61 /* College */;
 			targetProxy = C4656240244E4E4F00BE0B61 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -451,16 +463,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = NZC6LC8NWM;
 				INFOPLIST_FILE = Dispensado/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3;
+				MARKETING_VERSION = 4;
 				PRODUCT_BUNDLE_IDENTIFIER = joaoFlores.dispensado;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = College;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -471,16 +484,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = NZC6LC8NWM;
 				INFOPLIST_FILE = Dispensado/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3;
+				MARKETING_VERSION = 4;
 				PRODUCT_BUNDLE_IDENTIFIER = joaoFlores.dispensado;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = College;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -504,7 +518,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Dispensado.app/Dispensado";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/College.app/College";
 			};
 			name = Debug;
 		};
@@ -526,7 +540,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Dispensado.app/Dispensado";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/College.app/College";
 			};
 			name = Release;
 		};
@@ -573,7 +587,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		C4656216244E4E4E00BE0B61 /* Build configuration list for PBXProject "Dispensado" */ = {
+		C4656216244E4E4E00BE0B61 /* Build configuration list for PBXProject "College" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C4656246244E4E4F00BE0B61 /* Debug */,
@@ -582,7 +596,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C4656248244E4E4F00BE0B61 /* Build configuration list for PBXNativeTarget "Dispensado" */ = {
+		C4656248244E4E4F00BE0B61 /* Build configuration list for PBXNativeTarget "College" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C4656249244E4E4F00BE0B61 /* Debug */,
@@ -591,7 +605,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C465624B244E4E4F00BE0B61 /* Build configuration list for PBXNativeTarget "DispensadoTests" */ = {
+		C465624B244E4E4F00BE0B61 /* Build configuration list for PBXNativeTarget "CollegeTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C465624C244E4E4F00BE0B61 /* Debug */,
@@ -600,7 +614,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C465624E244E4E4F00BE0B61 /* Build configuration list for PBXNativeTarget "DispensadoUITests" */ = {
+		C465624E244E4E4F00BE0B61 /* Build configuration list for PBXNativeTarget "CollegeUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C465624F244E4E4F00BE0B61 /* Debug */,

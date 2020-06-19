@@ -36,6 +36,10 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
             overrideUserInterfaceStyle = .light
         }
         
+        if #available(iOS 10.3, *) {
+            SKStoreReviewController.requestReview()
+        }
+        
         obsTextView.layer.cornerRadius = 10
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: Selector(("dismissKeyboardFunc")))
@@ -136,7 +140,7 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
         let photo = photoImageView.image
         let lessons = Int(lessonsTextField.text ?? "0")
         let observations = obsTextView.text ?? ""
-        maxMiss = Int(Double(lessons ?? 0) * 4.5)
+        maxMiss = Int(Double(lessons ?? 0))
         
         book = BookClass(name: name, photo: photo, currentMiss: currentMiss, maxMiss: maxMiss, lessons: lessons ?? 0, observations: observations)
     }
@@ -156,14 +160,23 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
         if(currentMiss > 0) {
             currentMiss = currentMiss - 1
             missTextField.text = "\(currentMiss) / \(maxMiss)"
+            if(currentMiss > maxMiss) {
+                missTextField.textColor = UIColor.red
+            }
+            else {
+                missTextField.textColor = UIColor.black
+            }
         }
     }
     
     @IBAction func addMiss(_ sender: Any) {
         currentMiss = currentMiss + 1
         missTextField.text = "\(currentMiss) / \(maxMiss)"
-        if #available(iOS 10.3, *) {
-            SKStoreReviewController.requestReview()
+        if(currentMiss > maxMiss) {
+            missTextField.textColor = UIColor.red
+        }
+        else {
+            missTextField.textColor = UIColor.black
         }
     }
     //MARK: Private Methods
@@ -174,10 +187,16 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
     }
     
     @objc func dismissKeyboardFunc() {
-        maxMiss = Int(Double(Int(lessonsTextField.text ?? "0") ?? 0) * 4.5)
+        maxMiss = Int(Double(Int(lessonsTextField.text ?? "0") ?? 0))
         
         if book != nil {
             missTextField.text = "\(currentMiss) / \(maxMiss)"
+            if(currentMiss > maxMiss) {
+                missTextField.textColor = UIColor.red
+            }
+            else {
+                missTextField.textColor = UIColor.black
+            }
         }
         
         view.endEditing(true)

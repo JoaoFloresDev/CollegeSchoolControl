@@ -60,6 +60,13 @@ class BookTableViewController: UITableViewController {
         cell.photoImageView.image = meal.photo
         cell.missLabel.text = "\(meal.currentMiss) / \(meal.maxMiss)"
     
+        if(meal.currentMiss > meal.maxMiss)  {
+            cell.missLabel.textColor = UIColor.red
+        }
+        else {
+            cell.missLabel.textColor = UIColor.black
+        }
+        
         cell.cropBounds(viewlayer: cell.photoImageView.layer, cornerRadius: 10)
         return cell
     }

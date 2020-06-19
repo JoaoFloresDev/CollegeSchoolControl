@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="M0b-Rs-1Fd">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="M0b-Rs-1Fd">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Dispensado-->
+        <!--College-->
         <scene sceneID="aUG-AJ-7Cr">
             <objects>
-                <tableViewController id="dUQ-9b-aAs" customClass="BookTableViewController" customModule="Dispensado" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="dUQ-9b-aAs" customClass="BookTableViewController" customModule="College" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="black" dataMode="prototypes" style="plain" rowHeight="90" sectionHeaderHeight="28" sectionFooterHeight="28" id="zn2-1H-qYg">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="separatorColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MealTableViewCell" rowHeight="60" id="aol-VT-6as" userLabel="TableViewCell" customClass="BookTableViewCell" customModule="Dispensado" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MealTableViewCell" rowHeight="60" id="aol-VT-6as" userLabel="TableViewCell" customClass="BookTableViewCell" customModule="College" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aol-VT-6as" id="cy4-Pj-YIr">
@@ -70,7 +70,7 @@
                             <outlet property="delegate" destination="dUQ-9b-aAs" id="wM4-LD-iKT"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Dispensado" id="by7-TF-xQr">
+                    <navigationItem key="navigationItem" title="College" id="by7-TF-xQr">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="ePv-yE-vvs">
                             <connections>
                                 <segue destination="7ih-zM-tDF" kind="presentation" identifier="AddItem" id="YmJ-Bl-zPi"/>
@@ -82,10 +82,10 @@
             </objects>
             <point key="canvasLocation" x="179.71014492753625" y="823.66071428571422"/>
         </scene>
-        <!--Nova Matéria-->
+        <!--New Subject-->
         <scene sceneID="uf2-q1-A8x">
             <objects>
-                <viewController id="d1f-Vf-Z6B" customClass="BookViewController" customModule="Dispensado" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="d1f-Vf-Z6B" customClass="BookViewController" customModule="College" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="t8D-jT-eZj"/>
                         <viewControllerLayoutGuide type="bottom" id="hT6-Nl-HGa"/>
@@ -108,7 +108,7 @@
                                                 <textInputTraits key="textInputTraits" keyboardAppearance="alert" enablesReturnKeyAutomatically="YES"/>
                                                 <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES"/>
                                             </textView>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Nome da disciplina" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="lVI-i2-vxD" userLabel="Name Text Field">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name of subject" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="lVI-i2-vxD" userLabel="Name Text Field">
                                                 <rect key="frame" x="92" y="20" width="312" height="37"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="37" id="hOM-5k-64V"/>
@@ -116,7 +116,7 @@
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
                                                 <textInputTraits key="textInputTraits" keyboardAppearance="alert" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
                                             </textField>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notas" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="obe-Zy-P2f">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="obe-Zy-P2f">
                                                 <rect key="frame" x="20" y="234" width="54" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="arM-oO-iI1"/>
@@ -140,7 +140,7 @@
                                                 <rect key="frame" x="0.0" y="124" width="414" height="90"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00 / 00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zz8-7M-fk7">
-                                                        <rect key="frame" x="10" y="31.5" width="194" height="54"/>
+                                                        <rect key="frame" x="10" y="18" width="194" height="54"/>
                                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="45"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -168,31 +168,21 @@
                                                             <action selector="addMiss:" destination="d1f-Vf-Z6B" eventType="touchUpInside" id="snI-2p-pcN"/>
                                                         </connections>
                                                     </button>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="máx. horas ausente" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uok-39-pC5">
-                                                        <rect key="frame" x="10" y="5" width="194" height="17"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.91763585810000003" green="0.91764122250000002" blue="0.91765522960000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <constraints>
-                                                    <constraint firstItem="QaV-iq-1ZA" firstAttribute="leading" secondItem="Uok-39-pC5" secondAttribute="trailing" constant="10" id="0He-5o-YdU"/>
                                                     <constraint firstItem="xHW-QW-WSj" firstAttribute="leading" secondItem="QaV-iq-1ZA" secondAttribute="trailing" constant="30" id="5fR-w3-DyY"/>
                                                     <constraint firstItem="xHW-QW-WSj" firstAttribute="top" secondItem="i1k-fo-Ckh" secondAttribute="top" constant="10" id="8Ze-M0-Vw5"/>
                                                     <constraint firstItem="zz8-7M-fk7" firstAttribute="leading" secondItem="i1k-fo-Ckh" secondAttribute="leading" constant="10" id="CaQ-Im-wLU"/>
-                                                    <constraint firstItem="zz8-7M-fk7" firstAttribute="centerY" secondItem="i1k-fo-Ckh" secondAttribute="centerY" multiplier="1.3" id="KdL-Ez-xxX"/>
+                                                    <constraint firstItem="zz8-7M-fk7" firstAttribute="centerY" secondItem="i1k-fo-Ckh" secondAttribute="centerY" id="KdL-Ez-xxX"/>
                                                     <constraint firstItem="QaV-iq-1ZA" firstAttribute="centerY" secondItem="i1k-fo-Ckh" secondAttribute="centerY" id="Mgq-Qe-0gW"/>
                                                     <constraint firstAttribute="trailing" secondItem="xHW-QW-WSj" secondAttribute="trailing" constant="30" id="TlH-lb-IMd"/>
                                                     <constraint firstAttribute="bottom" secondItem="xHW-QW-WSj" secondAttribute="bottom" constant="10" id="U3S-cx-BOf"/>
-                                                    <constraint firstItem="Uok-39-pC5" firstAttribute="centerX" secondItem="zz8-7M-fk7" secondAttribute="centerX" id="XpT-O2-TQh"/>
                                                     <constraint firstItem="xHW-QW-WSj" firstAttribute="centerY" secondItem="i1k-fo-Ckh" secondAttribute="centerY" id="p6A-55-4kc"/>
-                                                    <constraint firstItem="Uok-39-pC5" firstAttribute="top" secondItem="i1k-fo-Ckh" secondAttribute="top" constant="5" id="rBN-aL-Htk"/>
-                                                    <constraint firstItem="Uok-39-pC5" firstAttribute="leading" secondItem="i1k-fo-Ckh" secondAttribute="leading" constant="10" id="rtE-SY-vQa"/>
                                                     <constraint firstItem="QaV-iq-1ZA" firstAttribute="leading" secondItem="zz8-7M-fk7" secondAttribute="trailing" constant="10" id="rx3-ha-7J3"/>
                                                 </constraints>
                                             </view>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Horas por semana (créditos)" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="iCF-Wp-JeI">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Maximum absence allowed" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="iCF-Wp-JeI">
                                                 <rect key="frame" x="92" y="67" width="312" height="37"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="37" id="fCy-Ti-jlF"/>
@@ -255,7 +245,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="7qE-KP-SHp"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Nova Matéria" id="A3N-EO-FRO">
+                    <navigationItem key="navigationItem" title="New Subject" id="A3N-EO-FRO">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="3r4-qL-xQe">
                             <connections>
                                 <action selector="cancel:" destination="d1f-Vf-Z6B" id="dcY-u4-HCd"/>
@@ -324,12 +314,12 @@
             <point key="canvasLocation" x="1036" y="1197"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="IconPlaceholder" width="167" height="167"/>
-        <image name="minus.circle" catalog="system" width="64" height="60"/>
-        <image name="plus.circle" catalog="system" width="64" height="60"/>
-    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="NST-rV-Sae"/>
     </inferredMetricsTieBreakers>
+    <resources>
+        <image name="IconPlaceholder" width="167" height="167"/>
+        <image name="minus.circle" catalog="system" width="128" height="121"/>
+        <image name="plus.circle" catalog="system" width="128" height="121"/>
+    </resources>
 </document>
