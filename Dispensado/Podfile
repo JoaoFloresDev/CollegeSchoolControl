@@ -6,7 +6,8 @@ target 'College' do
   use_frameworks!
 
   # Pods for College
-
+  pod 'Google-Mobile-Ads-SDK'
+	
   target 'CollegeTests' do
     inherit! :search_paths
     # Pods for testing

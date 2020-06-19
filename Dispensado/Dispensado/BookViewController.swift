@@ -9,8 +9,9 @@
 import UIKit
 import os.log
 import StoreKit
+import GoogleMobileAds
 
-class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, GADInterstitialDelegate {
     
     //MARK: Properties
     @IBOutlet weak var nameTextField: UITextField!
@@ -29,21 +30,39 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
     var maxMiss = 0
     
     var book: BookClass?
+    var interstitial: GADInterstitial!
+    var firstAdd = true
     
+    func createAndLoadInterstitial() -> GADInterstitial {
+        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-8858389345934911/2509258121")
+        interstitial.delegate = self
+        interstitial.load(GADRequest())
+        return interstitial
+    }
+    
+    func interstitialDidDismissScreen(_ ad: GADInterstitial) {
+        interstitial = createAndLoadInterstitial()
+    }
+    
+    //    MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         if #available(iOS 13.0, *) {
             overrideUserInterfaceStyle = .light
         }
         
-        if #available(iOS 10.3, *) {
-            SKStoreReviewController.requestReview()
-        }
+        //      ADS
+        interstitial = GADInterstitial(adUnitID: "ca-app-pub-8858389345934911/2509258121")
+        interstitial.delegate = self
+        interstitial = createAndLoadInterstitial()
+        let request = GADRequest()
+        interstitial.load(request)
+        // ------
         
         obsTextView.layer.cornerRadius = 10
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: Selector(("dismissKeyboardFunc")))
-        
         
         view.addGestureRecognizer(tap)
         
@@ -72,6 +91,7 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
         cropBounds(viewlayer: photoImageView.layer, cornerRadius: 10)
     }
     
+    //    MARK: - LifeCycle
     func cropBounds(viewlayer: CALayer, cornerRadius: Float) {
         
         let imageLayer = viewlayer
@@ -79,9 +99,8 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
         imageLayer.masksToBounds = true
     }
     
-    //MARK: UITextFieldDelegate
+    //    MARK: - UITextFieldDelegate
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        
         saveButton.isEnabled = false
     }
     
@@ -96,7 +115,7 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
         navigationItem.title = textField.text
     }
     
-    //MARK: UIImagePickerControllerDelegate
+    //MARK: - UIImagePickerControllerDelegate
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
@@ -115,7 +134,7 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
         dismiss(animated: true, completion: nil)
     }
     
-    //MARK: Navigation
+    //MARK:- Navigation
     @IBAction func cancel(_ sender: UIBarButtonItem) {
         let isPresentingInAddBookMode = presentingViewController is UINavigationController
         
@@ -125,6 +144,7 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
         else if let owningNavigationController = navigationController{
             owningNavigationController.popViewController(animated: true)
         }
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -145,7 +165,7 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
         book = BookClass(name: name, photo: photo, currentMiss: currentMiss, maxMiss: maxMiss, lessons: lessons ?? 0, observations: observations)
     }
     
-    //MARK: Actions
+    //MARK: - Actions
     @IBAction func selectImageFromPhotoLibrary(_ sender: UITapGestureRecognizer) {
         
         let imagePicker =  UIImagePickerController()
@@ -170,6 +190,7 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
     }
     
     @IBAction func addMiss(_ sender: Any) {
+        
         currentMiss = currentMiss + 1
         missTextField.text = "\(currentMiss) / \(maxMiss)"
         if(currentMiss > maxMiss) {
@@ -178,9 +199,14 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
         else {
             missTextField.textColor = UIColor.black
         }
+        
+        if interstitial.isReady && firstAdd {
+          interstitial.present(fromRootViewController: self)
+            firstAdd = false
+        }
     }
-    //MARK: Private Methods
     
+    //MARK: - Private Methods
     private func updateSaveButtonState() {
         let text = nameTextField.text ?? ""
         saveButton.isEnabled = !text.isEmpty
@@ -200,6 +226,32 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
         }
         
         view.endEditing(true)
+    }
+    
+    /// Tells the delegate an ad request succeeded.
+    func interstitialDidReceiveAd(_ ad: GADInterstitial) {
+        print("interstitialDidReceiveAd")
+    }
+    
+    /// Tells the delegate an ad request failed.
+    func interstitial(_ ad: GADInterstitial, didFailToReceiveAdWithError error: GADRequestError) {
+        print("interstitial:didFailToReceiveAdWithError: \(error.localizedDescription)")
+    }
+    
+    /// Tells the delegate that an interstitial will be presented.
+    func interstitialWillPresentScreen(_ ad: GADInterstitial) {
+        print("interstitialWillPresentScreen")
+    }
+    
+    /// Tells the delegate the interstitial is to be animated off the screen.
+    func interstitialWillDismissScreen(_ ad: GADInterstitial) {
+        print("interstitialWillDismissScreen")
+    }
+    
+    /// Tells the delegate that a user click will open another app
+    /// (such as the App Store), backgrounding the current app.
+    func interstitialWillLeaveApplication(_ ad: GADInterstitial) {
+        print("interstitialWillLeaveApplication")
     }
 }
 

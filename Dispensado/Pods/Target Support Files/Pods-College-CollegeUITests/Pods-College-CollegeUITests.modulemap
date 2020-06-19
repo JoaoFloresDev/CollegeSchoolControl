@@ -1,0 +1,6 @@
+framework module Pods_College_CollegeUITests {
+  umbrella header "Pods-College-CollegeUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
