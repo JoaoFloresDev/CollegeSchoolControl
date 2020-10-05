@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="M0b-Rs-1Fd">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="M0b-Rs-1Fd">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -26,7 +26,7 @@
                                         <constraint firstAttribute="height" constant="50" id="6ki-Ls-doZ"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                    <state key="normal" title="Be  Premium">
+                                    <state key="normal" title="Remover Propaganda">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
                                     <connections>
@@ -109,7 +109,7 @@
             </objects>
             <point key="canvasLocation" x="179.71014492753625" y="823.66071428571422"/>
         </scene>
-        <!--New Subject-->
+        <!--Nova Matéria-->
         <scene sceneID="uf2-q1-A8x">
             <objects>
                 <viewController id="d1f-Vf-Z6B" customClass="BookViewController" customModule="College" customModuleProvider="target" sceneMemberID="viewController">
@@ -135,7 +135,7 @@
                                                 <textInputTraits key="textInputTraits" keyboardAppearance="alert" enablesReturnKeyAutomatically="YES"/>
                                                 <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES"/>
                                             </textView>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name of subject" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="lVI-i2-vxD" userLabel="Name Text Field">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Nome da matéria" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="lVI-i2-vxD" userLabel="Name Text Field">
                                                 <rect key="frame" x="92" y="20" width="312" height="37"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="37" id="hOM-5k-64V"/>
@@ -143,8 +143,8 @@
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
                                                 <textInputTraits key="textInputTraits" keyboardAppearance="alert" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
                                             </textField>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="obe-Zy-P2f">
-                                                <rect key="frame" x="20" y="234" width="54" height="30"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notas de aula" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="obe-Zy-P2f">
+                                                <rect key="frame" x="20" y="234" width="124" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="arM-oO-iI1"/>
                                                 </constraints>
@@ -209,7 +209,7 @@
                                                     <constraint firstItem="QaV-iq-1ZA" firstAttribute="leading" secondItem="zz8-7M-fk7" secondAttribute="trailing" constant="10" id="rx3-ha-7J3"/>
                                                 </constraints>
                                             </view>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Maximum absence allowed" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="iCF-Wp-JeI">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Máximo de Faltas" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="iCF-Wp-JeI">
                                                 <rect key="frame" x="92" y="67" width="312" height="37"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="37" id="fCy-Ti-jlF"/>
@@ -272,13 +272,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="7qE-KP-SHp"/>
                     </view>
-                    <navigationItem key="navigationItem" title="New Subject" id="A3N-EO-FRO">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="3r4-qL-xQe">
+                    <navigationItem key="navigationItem" title="Nova Matéria" id="A3N-EO-FRO">
+                        <barButtonItem key="leftBarButtonItem" title="Cancelar" id="3r4-qL-xQe">
                             <connections>
                                 <action selector="cancel:" destination="d1f-Vf-Z6B" id="dcY-u4-HCd"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="ClT-MO-tig">
+                        <barButtonItem key="rightBarButtonItem" title="Salvar" id="ClT-MO-tig">
                             <connections>
                                 <segue destination="4dm-ml-iqy" kind="unwind" unwindAction="unwindToBookListWithSender:" id="Npd-PX-Woi"/>
                             </connections>
@@ -503,13 +503,13 @@
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4xN-RM-IkT">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                                 <items>
-                                    <navigationItem title="Products" id="5wI-72-I3g">
-                                        <barButtonItem key="leftBarButtonItem" title="Close" id="u7a-bx-um5">
+                                    <navigationItem title="Produtos" id="5wI-72-I3g">
+                                        <barButtonItem key="leftBarButtonItem" title="Fechar" id="u7a-bx-um5">
                                             <connections>
                                                 <action selector="dismissView:" destination="6ZA-Sx-3vP" id="l0g-Jv-xjX"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="Restore" id="YEZ-Cl-3oU">
+                                        <barButtonItem key="rightBarButtonItem" title="Restaurar" id="YEZ-Cl-3oU">
                                             <connections>
                                                 <action selector="restorePressed:" destination="6ZA-Sx-3vP" id="HRa-rb-TlH"/>
                                             </connections>
