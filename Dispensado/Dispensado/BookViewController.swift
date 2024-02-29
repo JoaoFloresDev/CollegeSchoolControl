@@ -20,6 +20,9 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
     
     //    novos texts
     @IBOutlet weak var missTextField: UILabel!
+    @IBOutlet weak var totalMiss: UILabel!
+    @IBOutlet weak var dividerBar: UILabel!
+    
     @IBOutlet weak var lessonsTextField: UITextField!
     
     @IBOutlet weak var obsTextView: UITextView!
@@ -75,7 +78,8 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
             nameTextField.text = bookControll.name
             photoImageView.image = bookControll.photo ?? UIImage(named: "IconPlaceholder")
             
-            missTextField.text = "\(bookControll.currentMiss) / \(bookControll.maxMiss)"
+            missTextField.text = String(format: "%02d", bookControll.currentMiss)
+            totalMiss.text = String(format: "%02d", bookControll.maxMiss)
             
             currentMiss = bookControll.currentMiss
             maxMiss = bookControll.maxMiss
@@ -173,12 +177,19 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
     @IBAction func subMiss(_ sender: Any) {
         if(currentMiss > 0) {
             currentMiss = currentMiss - 1
-            missTextField.text = "\(currentMiss) / \(maxMiss)"
+            
+            missTextField.text = String(format: "%02d", currentMiss)
+            totalMiss.text = String(format: "%02d", maxMiss)
+            
             if(currentMiss > maxMiss) {
                 missTextField.textColor = UIColor.red
+                totalMiss.textColor = UIColor.red
+                dividerBar.textColor = UIColor.red
             }
             else {
                 missTextField.textColor = UIColor.black
+                totalMiss.textColor = UIColor.black
+                dividerBar.textColor = UIColor.black
             }
         }
     }
@@ -186,12 +197,18 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
     @IBAction func addMiss(_ sender: Any) {
         
         currentMiss = currentMiss + 1
-        missTextField.text = "\(currentMiss) / \(maxMiss)"
+        missTextField.text = String(format: "%02d", currentMiss)
+        totalMiss.text = String(format: "%02d", maxMiss)
+        
         if(currentMiss > maxMiss) {
             missTextField.textColor = UIColor.red
+            totalMiss.textColor = UIColor.red
+            dividerBar.textColor = UIColor.red
         }
         else {
             missTextField.textColor = UIColor.black
+            totalMiss.textColor = UIColor.black
+            dividerBar.textColor = UIColor.black
         }
         
         if(RazeFaceProducts.store.isProductPurchased("NoAds.College") || (UserDefaults.standard.object(forKey: "NoAds.College") != nil)) {
@@ -204,21 +221,22 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
     }
     
     //MARK: - Private Methods
-//    private func updateSaveButtonState() {
-//        let text = nameTextField.text ?? ""
-//        saveButton.isEnabled = !text.isEmpty
-//    }
-    
     @objc func dismissKeyboardFunc() {
         maxMiss = Int(Double(Int(lessonsTextField.text ?? "0") ?? 0))
         
         if book != nil {
-            missTextField.text = "\(currentMiss) / \(maxMiss)"
+            missTextField.text = String(format: "%02d", currentMiss)
+            totalMiss.text = String(format: "%02d", maxMiss)
+            
             if(currentMiss > maxMiss) {
                 missTextField.textColor = UIColor.red
+                totalMiss.textColor = UIColor.red
+                dividerBar.textColor = UIColor.red
             }
             else {
                 missTextField.textColor = UIColor.black
+                totalMiss.textColor = UIColor.black
+                dividerBar.textColor = UIColor.black
             }
         }
         
