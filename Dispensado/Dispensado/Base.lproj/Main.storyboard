@@ -67,12 +67,42 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" text="00 / 00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ktc-is-hc9">
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C49-6D-0Ud">
                                                             <rect key="frame" x="0.0" y="19" width="180" height="19"/>
-                                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
-                                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" text="00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ktc-is-hc9">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="25" height="19"/>
+                                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="200" verticalHuggingPriority="200" text="00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bza-6c-9da">
+                                                                    <rect key="frame" x="47" y="0.0" width="133" height="19"/>
+                                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                                                    <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" text="/" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sud-Hp-98e">
+                                                                    <rect key="frame" x="33" y="0.0" width="6" height="19"/>
+                                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                                                    <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                            <constraints>
+                                                                <constraint firstItem="sud-Hp-98e" firstAttribute="top" secondItem="C49-6D-0Ud" secondAttribute="top" id="5vA-Gz-UFH"/>
+                                                                <constraint firstItem="Ktc-is-hc9" firstAttribute="top" secondItem="C49-6D-0Ud" secondAttribute="top" id="9Ij-nJ-Du5"/>
+                                                                <constraint firstAttribute="bottom" secondItem="sud-Hp-98e" secondAttribute="bottom" id="Gj2-z6-uWi"/>
+                                                                <constraint firstItem="Ktc-is-hc9" firstAttribute="leading" secondItem="C49-6D-0Ud" secondAttribute="leading" id="HQ2-Eh-Tzo"/>
+                                                                <constraint firstAttribute="bottom" secondItem="bza-6c-9da" secondAttribute="bottom" id="c7z-nw-3hG"/>
+                                                                <constraint firstItem="bza-6c-9da" firstAttribute="top" secondItem="C49-6D-0Ud" secondAttribute="top" id="fEF-UJ-KxN"/>
+                                                                <constraint firstAttribute="bottom" secondItem="Ktc-is-hc9" secondAttribute="bottom" id="gWa-Et-T7N"/>
+                                                                <constraint firstItem="bza-6c-9da" firstAttribute="leading" secondItem="sud-Hp-98e" secondAttribute="trailing" constant="8" id="psP-97-fOb"/>
+                                                                <constraint firstAttribute="trailing" secondItem="bza-6c-9da" secondAttribute="trailing" id="x62-8k-xg6"/>
+                                                                <constraint firstItem="sud-Hp-98e" firstAttribute="leading" secondItem="C49-6D-0Ud" secondAttribute="leading" constant="33" id="zjg-8o-qKi"/>
+                                                            </constraints>
+                                                        </view>
                                                     </subviews>
                                                 </stackView>
                                             </subviews>
@@ -89,10 +119,12 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="addButton" destination="SdZ-g4-GuH" id="sv6-bp-RfV"/>
+                                    <outlet property="dividerBar" destination="sud-Hp-98e" id="hSI-Kq-7b9"/>
                                     <outlet property="lessBUtton" destination="x1r-WR-XnS" id="jtI-fl-6o1"/>
                                     <outlet property="missLabel" destination="Ktc-is-hc9" id="tMT-ci-NyD"/>
                                     <outlet property="nameLabel" destination="7A6-5a-tN5" id="qBI-s5-t2c"/>
                                     <outlet property="photoImageView" destination="g02-AR-8ZE" id="mIv-hT-LUl"/>
+                                    <outlet property="totalMiss" destination="bza-6c-9da" id="D60-XK-5DK"/>
                                     <segue destination="d1f-Vf-Z6B" kind="show" identifier="ShowDetail" id="NST-rV-Sae"/>
                                 </connections>
                             </tableViewCell>

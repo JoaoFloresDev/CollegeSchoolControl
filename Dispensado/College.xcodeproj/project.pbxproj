@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		73FBE1792B9037FE001818D4 /* PurchaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FBE1742B9037FD001818D4 /* PurchaseViewController.swift */; };
+		73FBE17A2B9037FE001818D4 /* PurchaseHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FBE1752B9037FD001818D4 /* PurchaseHeaderView.swift */; };
+		73FBE17B2B9037FE001818D4 /* DiamondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FBE1762B9037FD001818D4 /* DiamondView.swift */; };
+		73FBE17C2B9037FE001818D4 /* PurchaseBenetList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FBE1772B9037FD001818D4 /* PurchaseBenetList.swift */; };
+		73FBE17D2B9037FE001818D4 /* Purchase.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73FBE1782B9037FD001818D4 /* Purchase.storyboard */; };
 		7F1D06A05C7EE9C153C4CE7D /* Pods_College_CollegeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 728CCAEBF33286A964F7F2C9 /* Pods_College_CollegeUITests.framework */; };
 		89AE27E773ADA0F642B11FAE /* Pods_College.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B979786293A61E819C9A8C0 /* Pods_College.framework */; };
 		C42190F0249C6ECC00C8668C /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42190EB249C6ECA00C8668C /* ProductCell.swift */; };
@@ -54,6 +59,11 @@
 		4AE6DEF506CC63E4BF4E4AF0 /* Pods-College.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-College.release.xcconfig"; path = "Target Support Files/Pods-College/Pods-College.release.xcconfig"; sourceTree = "<group>"; };
 		593205C9F9A17ABE2A031969 /* Pods-CollegeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollegeTests.debug.xcconfig"; path = "Target Support Files/Pods-CollegeTests/Pods-CollegeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		728CCAEBF33286A964F7F2C9 /* Pods_College_CollegeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_College_CollegeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		73FBE1742B9037FD001818D4 /* PurchaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurchaseViewController.swift; sourceTree = "<group>"; };
+		73FBE1752B9037FD001818D4 /* PurchaseHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurchaseHeaderView.swift; sourceTree = "<group>"; };
+		73FBE1762B9037FD001818D4 /* DiamondView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiamondView.swift; sourceTree = "<group>"; };
+		73FBE1772B9037FD001818D4 /* PurchaseBenetList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurchaseBenetList.swift; sourceTree = "<group>"; };
+		73FBE1782B9037FD001818D4 /* Purchase.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Purchase.storyboard; sourceTree = "<group>"; };
 		A49CAE68556E48FA97FBE204 /* Pods-CollegeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollegeTests.release.xcconfig"; path = "Target Support Files/Pods-CollegeTests/Pods-CollegeTests.release.xcconfig"; sourceTree = "<group>"; };
 		C42190EB249C6ECA00C8668C /* ProductCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductCell.swift; sourceTree = "<group>"; };
 		C42190EC249C6ECB00C8668C /* RazeFaceProducts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RazeFaceProducts.swift; sourceTree = "<group>"; };
@@ -127,6 +137,18 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		73FBE1732B9037FD001818D4 /* Purchase */ = {
+			isa = PBXGroup;
+			children = (
+				73FBE1742B9037FD001818D4 /* PurchaseViewController.swift */,
+				73FBE1752B9037FD001818D4 /* PurchaseHeaderView.swift */,
+				73FBE1762B9037FD001818D4 /* DiamondView.swift */,
+				73FBE1772B9037FD001818D4 /* PurchaseBenetList.swift */,
+				73FBE1782B9037FD001818D4 /* Purchase.storyboard */,
+			);
+			path = Purchase;
+			sourceTree = "<group>";
+		};
 		C42190EA249C6EBB00C8668C /* Purchase */ = {
 			isa = PBXGroup;
 			children = (
@@ -177,6 +199,7 @@
 		C465621D244E4E4E00BE0B61 /* Dispensado */ = {
 			isa = PBXGroup;
 			children = (
+				73FBE1732B9037FD001818D4 /* Purchase */,
 				C465621E244E4E4E00BE0B61 /* AppDelegate.swift */,
 				C4656298244E505000BE0B61 /* SceneDelegate.swift */,
 				C4656251244E4EB200BE0B61 /* BookViewController.swift */,
@@ -320,6 +343,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C465622E244E4E4F00BE0B61 /* LaunchScreen.storyboard in Resources */,
+				73FBE17D2B9037FE001818D4 /* Purchase.storyboard in Resources */,
 				C465622B244E4E4F00BE0B61 /* Assets.xcassets in Resources */,
 				C4656226244E4E4E00BE0B61 /* Main.storyboard in Resources */,
 			);
@@ -452,14 +476,18 @@
 				C4656229244E4E4E00BE0B61 /* Dispensado.xcdatamodeld in Sources */,
 				C4656299244E505000BE0B61 /* SceneDelegate.swift in Sources */,
 				C4656252244E4EB200BE0B61 /* BookViewController.swift in Sources */,
+				73FBE17B2B9037FE001818D4 /* DiamondView.swift in Sources */,
+				73FBE1792B9037FE001818D4 /* PurchaseViewController.swift in Sources */,
 				C42190F4249C6ECC00C8668C /* IAPHelper.swift in Sources */,
 				C4656254244E4ED500BE0B61 /* BookClass.swift in Sources */,
 				C42190F7249C6EFB00C8668C /* WelcomeViewController.swift in Sources */,
+				73FBE17C2B9037FE001818D4 /* PurchaseBenetList.swift in Sources */,
 				C465621F244E4E4E00BE0B61 /* AppDelegate.swift in Sources */,
 				C42190F0249C6ECC00C8668C /* ProductCell.swift in Sources */,
 				C4656256244E4EFD00BE0B61 /* BookTableViewCell.swift in Sources */,
 				C42190F2249C6ECC00C8668C /* DetailViewController.swift in Sources */,
 				C42190F1249C6ECC00C8668C /* RazeFaceProducts.swift in Sources */,
+				73FBE17A2B9037FE001818D4 /* PurchaseHeaderView.swift in Sources */,
 				C42190F8249C6EFB00C8668C /* MasterViewController.swift in Sources */,
 				C4656258244E4F3600BE0B61 /* BookTableViewController.swift in Sources */,
 			);

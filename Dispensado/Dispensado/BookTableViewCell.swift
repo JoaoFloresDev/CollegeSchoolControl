@@ -13,8 +13,11 @@ class BookTableViewCell: UITableViewCell {
     //MARK: Properties
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var photoImageView: UIImageView!
+    
     @IBOutlet weak var missLabel: UILabel!
-
+    @IBOutlet weak var dividerBar: UILabel!
+    @IBOutlet weak var totalMiss: UILabel!
+    
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var lessBUtton: UIButton!
     

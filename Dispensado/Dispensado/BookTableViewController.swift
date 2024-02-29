@@ -76,7 +76,9 @@ class BookTableViewController: UITableViewController {
         } else {
             cell.photoImageView.isHidden = true
         }
-        cell.missLabel.text = "\(meal.currentMiss) / \(meal.maxMiss)"
+        
+        cell.missLabel.text = String(format: "%02d", meal.currentMiss)
+        cell.totalMiss.text = String(format: "%02d", meal.maxMiss)
         
         cell.addButton.tag = indexPath.row
         cell.lessBUtton.tag = indexPath.row
@@ -85,9 +87,13 @@ class BookTableViewController: UITableViewController {
         cell.lessBUtton.addTarget(self, action: #selector(buttonLessTapped(_:)), for: .touchUpInside)
         if(meal.currentMiss > meal.maxMiss)  {
             cell.missLabel.textColor = UIColor.red
+            cell.dividerBar.textColor = UIColor.red
+            cell.totalMiss.textColor = UIColor.red
         }
         else {
             cell.missLabel.textColor = UIColor.black
+            cell.dividerBar.textColor = UIColor.black
+            cell.totalMiss.textColor = UIColor.black
         }
         
         cell.cropBounds(viewlayer: cell.photoImageView.layer, cornerRadius: 10)
@@ -109,6 +115,9 @@ class BookTableViewController: UITableViewController {
     
     @objc private func buttonLessTapped(_ sender: UIButton) {
         var book = books[sender.tag]
+        if book.currentMiss <= 0 {
+            return
+        }
         book.currentMiss -= 1
         books[sender.tag] = book
         tableView.reloadRows(at: [IndexPath(row: sender.tag, section: 0)], with: .none)
