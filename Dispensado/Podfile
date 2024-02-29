@@ -7,7 +7,7 @@ target 'College' do
 
   # Pods for College
   pod 'Google-Mobile-Ads-SDK'
-	
+  pod 'SnapKit' 
   target 'CollegeTests' do
     inherit! :search_paths
     # Pods for testing

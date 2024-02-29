@@ -30,9 +30,11 @@ PODS:
   - nanopb/decode (1.30905.0)
   - nanopb/encode (1.30905.0)
   - PromisesObjC (1.2.8)
+  - SnapKit (5.6.0)
 
 DEPENDENCIES:
   - Google-Mobile-Ads-SDK
+  - SnapKit
 
 SPEC REPOS:
   trunk:
@@ -41,6 +43,7 @@ SPEC REPOS:
     - GoogleUtilities
     - nanopb
     - PromisesObjC
+    - SnapKit
 
 SPEC CHECKSUMS:
   Google-Mobile-Ads-SDK: 7052557293c75c676db55feb707ace9b790f32c1
@@ -48,7 +51,8 @@ SPEC CHECKSUMS:
   GoogleUtilities: 39530bc0ad980530298e9c4af8549e991fd033b1
   nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
+  SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
 
-PODFILE CHECKSUM: 11c7612d519de4f45e75214140f7550865c814a0
+PODFILE CHECKSUM: 736fe40c735a53cc135cf00fd3c665f24476ae21
 
-COCOAPODS: 1.9.1
+COCOAPODS: 1.13.0

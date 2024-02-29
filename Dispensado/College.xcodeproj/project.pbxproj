@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -12,7 +12,6 @@
 		C42190F0249C6ECC00C8668C /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42190EB249C6ECA00C8668C /* ProductCell.swift */; };
 		C42190F1249C6ECC00C8668C /* RazeFaceProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42190EC249C6ECB00C8668C /* RazeFaceProducts.swift */; };
 		C42190F2249C6ECC00C8668C /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42190ED249C6ECB00C8668C /* DetailViewController.swift */; };
-		C42190F3249C6ECC00C8668C /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42190EE249C6ECB00C8668C /* Calculator.swift */; };
 		C42190F4249C6ECC00C8668C /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42190EF249C6ECC00C8668C /* IAPHelper.swift */; };
 		C42190F7249C6EFB00C8668C /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42190F5249C6EFA00C8668C /* WelcomeViewController.swift */; };
 		C42190F8249C6EFB00C8668C /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42190F6249C6EFA00C8668C /* MasterViewController.swift */; };
@@ -59,7 +58,6 @@
 		C42190EB249C6ECA00C8668C /* ProductCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductCell.swift; sourceTree = "<group>"; };
 		C42190EC249C6ECB00C8668C /* RazeFaceProducts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RazeFaceProducts.swift; sourceTree = "<group>"; };
 		C42190ED249C6ECB00C8668C /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
-		C42190EE249C6ECB00C8668C /* Calculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Calculator.swift; sourceTree = "<group>"; };
 		C42190EF249C6ECC00C8668C /* IAPHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAPHelper.swift; sourceTree = "<group>"; };
 		C42190F5249C6EFA00C8668C /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		C42190F6249C6EFA00C8668C /* MasterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
@@ -134,7 +132,6 @@
 			children = (
 				C42190F6249C6EFA00C8668C /* MasterViewController.swift */,
 				C42190F5249C6EFA00C8668C /* WelcomeViewController.swift */,
-				C42190EE249C6ECB00C8668C /* Calculator.swift */,
 				C42190ED249C6ECB00C8668C /* DetailViewController.swift */,
 				C42190EF249C6ECC00C8668C /* IAPHelper.swift */,
 				C42190EB249C6ECA00C8668C /* ProductCell.swift */,
@@ -455,7 +452,6 @@
 				C4656229244E4E4E00BE0B61 /* Dispensado.xcdatamodeld in Sources */,
 				C4656299244E505000BE0B61 /* SceneDelegate.swift in Sources */,
 				C4656252244E4EB200BE0B61 /* BookViewController.swift in Sources */,
-				C42190F3249C6ECC00C8668C /* Calculator.swift in Sources */,
 				C42190F4249C6ECC00C8668C /* IAPHelper.swift in Sources */,
 				C4656254244E4ED500BE0B61 /* BookClass.swift in Sources */,
 				C42190F7249C6EFB00C8668C /* WelcomeViewController.swift in Sources */,

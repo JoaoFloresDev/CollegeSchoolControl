@@ -24,7 +24,7 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
     
     @IBOutlet weak var obsTextView: UITextView!
     
-    @IBOutlet weak var missesState: UIView!
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
     var currentMiss = 0
     var maxMiss = 0
@@ -32,6 +32,7 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
     var book: BookClass?
     var interstitial: GADInterstitial!
     var firstAdd = true
+    var photoImage: UIImage?
     
     func createAndLoadInterstitial() -> GADInterstitial {
         let interstitial = GADInterstitial(adUnitID: "ca-app-pub-8858389345934911/2509258121")
@@ -54,13 +55,11 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
             overrideUserInterfaceStyle = .light
         }
         
-        //      ADS
         interstitial = GADInterstitial(adUnitID: "ca-app-pub-8858389345934911/2509258121")
         interstitial.delegate = self
         interstitial = createAndLoadInterstitial()
         let request = GADRequest()
         interstitial.load(request)
-        // ------
         
         obsTextView.layer.cornerRadius = 10
         
@@ -74,7 +73,7 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
         if let bookControll = book {
             navigationItem.title = bookControll.name
             nameTextField.text = bookControll.name
-            photoImageView.image = bookControll.photo
+            photoImageView.image = bookControll.photo ?? UIImage(named: "IconPlaceholder")
             
             missTextField.text = "\(bookControll.currentMiss) / \(bookControll.maxMiss)"
             
@@ -83,12 +82,7 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
             
             lessonsTextField.text = String(bookControll.lessons)
             obsTextView.text = bookControll.observations
-            missesState.alpha = 1
-        } else {
-            missesState.alpha = 0
         }
-        
-        updateSaveButtonState()
         
         cropBounds(viewlayer: photoImageView.layer, cornerRadius: 10)
     }
@@ -101,11 +95,6 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
         imageLayer.masksToBounds = true
     }
     
-    //    MARK: - UITextFieldDelegate
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        saveButton.isEnabled = false
-    }
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         textField.resignFirstResponder()
@@ -113,7 +102,6 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        updateSaveButtonState()
         navigationItem.title = textField.text
     }
     
@@ -130,7 +118,7 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
         {   image = img    }
         else if let img = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
         {   image = img    }
-        
+        photoImage = image
         photoImageView.image = image
         
         dismiss(animated: true, completion: nil)
@@ -159,7 +147,7 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
         }
         
         let name = nameTextField.text ?? ""
-        let photo = photoImageView.image
+        let photo = photoImage
         let lessons = Int(lessonsTextField.text ?? "0")
         let observations = obsTextView.text ?? ""
         maxMiss = Int(Double(lessons ?? 0))
@@ -216,10 +204,10 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
     }
     
     //MARK: - Private Methods
-    private func updateSaveButtonState() {
-        let text = nameTextField.text ?? ""
-        saveButton.isEnabled = !text.isEmpty
-    }
+//    private func updateSaveButtonState() {
+//        let text = nameTextField.text ?? ""
+//        saveButton.isEnabled = !text.isEmpty
+//    }
     
     @objc func dismissKeyboardFunc() {
         maxMiss = Int(Double(Int(lessonsTextField.text ?? "0") ?? 0))
@@ -264,3 +252,12 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
     }
 }
 
+extension BookViewController: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        bottomConstraint.constant = 330
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        bottomConstraint.constant = 20
+    }
+}

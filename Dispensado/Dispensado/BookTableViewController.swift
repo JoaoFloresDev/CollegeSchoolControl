@@ -9,10 +9,12 @@
 import UIKit
 import os.log
 import StoreKit
+import SnapKit
 
 class BookTableViewController: UITableViewController {
     
     //MARK: Properties
+    @IBOutlet weak var premiumView: UIView!
     
     var books = [BookClass]()
 
@@ -20,23 +22,34 @@ class BookTableViewController: UITableViewController {
         super.viewDidLoad()
         if #available(iOS 13.0, *) {
             overrideUserInterfaceStyle = .light
-        } else {
-            // Fallback on earlier versions
-        }
-        // Use the edit button item provided by the table view controller.
+        } 
+        
         navigationItem.leftBarButtonItem = editButtonItem
         
         if let savedBooks = loadBooks() {
             books += savedBooks
         }
+        
+        let botaoEsquerda = UIBarButtonItem(title: "Pro", style: .plain, target: self, action: #selector(açãoDoBotãoEsquerda))
+        self.navigationItem.leftBarButtonItem = botaoEsquerda
     }
 
+    @objc 
+    func açãoDoBotãoEsquerda() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        if let viewController = storyboard.instantiateViewController(withIdentifier: "MasterViewController") as? UIViewController {
+            self.present(viewController, animated: true, completion: nil)
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
 
     //MARK: - Table view data source
 
+    @IBOutlet weak var purchaseButton: UIButton!
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -57,9 +70,19 @@ class BookTableViewController: UITableViewController {
         let meal = books[indexPath.row]
         
         cell.nameLabel.text = meal.name
-        cell.photoImageView.image = meal.photo
+        if let photo = meal.photo {
+            cell.photoImageView.image = meal.photo
+            cell.photoImageView.isHidden = false
+        } else {
+            cell.photoImageView.isHidden = true
+        }
         cell.missLabel.text = "\(meal.currentMiss) / \(meal.maxMiss)"
-    
+        
+        cell.addButton.tag = indexPath.row
+        cell.lessBUtton.tag = indexPath.row
+        
+        cell.addButton.addTarget(self, action: #selector(buttonAddTapped(_:)), for: .touchUpInside)
+        cell.lessBUtton.addTarget(self, action: #selector(buttonLessTapped(_:)), for: .touchUpInside)
         if(meal.currentMiss > meal.maxMiss)  {
             cell.missLabel.textColor = UIColor.red
         }
@@ -71,27 +94,36 @@ class BookTableViewController: UITableViewController {
         return cell
     }
     
-    // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
         return true
     }
     
-
+    @objc
+    func buttonAddTapped(_ sender: UIButton) {
+        var book = books[sender.tag]
+        book.currentMiss += 1
+        books[sender.tag] = book
+        tableView.reloadRows(at: [IndexPath(row: sender.tag, section: 0)], with: .none)
+        saveBooks()
+    }
+    
+    @objc private func buttonLessTapped(_ sender: UIButton) {
+        var book = books[sender.tag]
+        book.currentMiss -= 1
+        books[sender.tag] = book
+        tableView.reloadRows(at: [IndexPath(row: sender.tag, section: 0)], with: .none)
+        saveBooks()
+    }
     
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source
             books.remove(at: indexPath.row)
             saveBooks()
             tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
     }
 
-    
     //MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -132,14 +164,11 @@ class BookTableViewController: UITableViewController {
         if let sourceViewController = sender.source as? BookViewController, let meal = sourceViewController.book {
             
             if let selectedIndexPath = tableView.indexPathForSelectedRow {
-                // Update an existing meal.
                 books[selectedIndexPath.row] = meal
                 tableView.reloadRows(at: [selectedIndexPath], with: .none)
             }
             else {
-                // Add a new meal.
                 let newIndexPath = IndexPath(row: books.count, section: 0)
-                
                 books.append(meal)
                 tableView.insertRows(at: [newIndexPath], with: .automatic)
             }
@@ -163,4 +192,21 @@ class BookTableViewController: UITableViewController {
         return NSKeyedUnarchiver.unarchiveObject(withFile: BookClass.ArchiveURL.path) as? [BookClass]
     }
 
+}
+
+extension UIView {
+    func removerTodasConstraints() {
+        // Remove todas as constraints que referenciam a view
+        var superview = self.superview
+        
+        while let view = superview {
+            for constraint in view.constraints where constraint.firstItem as? UIView == self || constraint.secondItem as? UIView == self {
+                view.removeConstraint(constraint)
+            }
+            superview = view.superview
+        }
+        
+        // Remove todas as constraints da própria view
+        self.removeConstraints(self.constraints)
+    }
 }
