@@ -36,11 +36,9 @@ class BookTableViewController: UITableViewController {
 
     @objc 
     func açãoDoBotãoEsquerda() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        
-        if let viewController = storyboard.instantiateViewController(withIdentifier: "MasterViewController") as? UIViewController {
-            self.present(viewController, animated: true, completion: nil)
-        }
+        let storyboard = UIStoryboard(name: "Purchase",bundle: nil)
+        let purchaseVC = storyboard.instantiateViewController(withIdentifier: "Purchase")
+        self.present(purchaseVC, animated: true)
     }
     
     override func didReceiveMemoryWarning() {

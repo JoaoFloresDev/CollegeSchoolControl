@@ -48,6 +48,13 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
         interstitial = createAndLoadInterstitial()
     }
     
+    private let doneButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Calcular máximo de faltas", for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
+        return button
+    }()
+    
     //    MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,6 +96,21 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
         }
         
         cropBounds(viewlayer: photoImageView.layer, cornerRadius: 10)
+        doneButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        
+        view.addSubview(doneButton)
+        doneButton.snp.makeConstraints { make in
+            make.top.equalTo(lessonsTextField.snp.bottom)
+            make.trailing.equalToSuperview().offset(-16)
+        }
+        doneButton.addTarget(self, action: #selector(doneButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc private func doneButtonTapped() {
+        let controller = CalculatorViewController()
+        controller.delegate = self
+        let navigation = UINavigationController(rootViewController: controller)
+        present(navigation, animated: true)
     }
     
     //    MARK: - LifeCycle
@@ -277,5 +299,11 @@ extension BookViewController: UITextViewDelegate {
     
     func textViewDidEndEditing(_ textView: UITextView) {
         bottomConstraint.constant = 20
+    }
+}
+
+extension BookViewController: CalculatorViewControllerDelegate {
+    func populateNewValue(withValue: Int) {
+        lessonsTextField.text = "\(withValue)"
     }
 }

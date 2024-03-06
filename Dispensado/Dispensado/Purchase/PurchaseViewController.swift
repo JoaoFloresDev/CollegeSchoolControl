@@ -45,7 +45,7 @@ class PurchaseViewController: UIViewController {
         button.layer.cornerRadius = 10
         button.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         button.clipsToBounds = true
-        button.setTitle("continue".localized(), for: .normal)
+        button.setTitle("Continue", for: .normal)
         
         // Adicionando a ação ao botão
         button.addTarget(self, action: #selector(didTapActionButton), for: .touchUpInside)
@@ -177,8 +177,8 @@ class PurchaseViewController: UIViewController {
     
     private func setupLocalizedText() {
         customNavigator.title = String()
-        closeButton.title = "close".localized()
-        restoreButton.title = "restore".localized()
+        closeButton.title = "Close"
+        restoreButton.title = "Restore"
     }
 }
 

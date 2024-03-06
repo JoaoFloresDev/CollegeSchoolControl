@@ -41,7 +41,7 @@ class PurchaseHeaderView: UIView {
         
         // Configuração do MarketIcon
         marketIcon.contentMode = .scaleAspectFit
-        marketIcon.image = UIImage(named: "iconSueca")
+        marketIcon.image = UIImage(named: "iconPurchase")
         
         marketIcon.layer.cornerRadius = 25 // Ajuste este valor para alterar a curvatura
         marketIcon.layer.masksToBounds = true

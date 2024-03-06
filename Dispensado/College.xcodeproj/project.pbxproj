@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		731E6D142B96B09200946F5B /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731E6D132B96B09200946F5B /* CalculatorViewController.swift */; };
 		73FBE1792B9037FE001818D4 /* PurchaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FBE1742B9037FD001818D4 /* PurchaseViewController.swift */; };
 		73FBE17A2B9037FE001818D4 /* PurchaseHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FBE1752B9037FD001818D4 /* PurchaseHeaderView.swift */; };
 		73FBE17B2B9037FE001818D4 /* DiamondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FBE1762B9037FD001818D4 /* DiamondView.swift */; };
@@ -59,6 +60,7 @@
 		4AE6DEF506CC63E4BF4E4AF0 /* Pods-College.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-College.release.xcconfig"; path = "Target Support Files/Pods-College/Pods-College.release.xcconfig"; sourceTree = "<group>"; };
 		593205C9F9A17ABE2A031969 /* Pods-CollegeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollegeTests.debug.xcconfig"; path = "Target Support Files/Pods-CollegeTests/Pods-CollegeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		728CCAEBF33286A964F7F2C9 /* Pods_College_CollegeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_College_CollegeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		731E6D132B96B09200946F5B /* CalculatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorViewController.swift; sourceTree = "<group>"; };
 		73FBE1742B9037FD001818D4 /* PurchaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurchaseViewController.swift; sourceTree = "<group>"; };
 		73FBE1752B9037FD001818D4 /* PurchaseHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurchaseHeaderView.swift; sourceTree = "<group>"; };
 		73FBE1762B9037FD001818D4 /* DiamondView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiamondView.swift; sourceTree = "<group>"; };
@@ -137,6 +139,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		731E6D122B96B07F00946F5B /* Calculator */ = {
+			isa = PBXGroup;
+			children = (
+				731E6D132B96B09200946F5B /* CalculatorViewController.swift */,
+			);
+			path = Calculator;
+			sourceTree = "<group>";
+		};
 		73FBE1732B9037FD001818D4 /* Purchase */ = {
 			isa = PBXGroup;
 			children = (
@@ -199,6 +209,7 @@
 		C465621D244E4E4E00BE0B61 /* Dispensado */ = {
 			isa = PBXGroup;
 			children = (
+				731E6D122B96B07F00946F5B /* Calculator */,
 				73FBE1732B9037FD001818D4 /* Purchase */,
 				C465621E244E4E4E00BE0B61 /* AppDelegate.swift */,
 				C4656298244E505000BE0B61 /* SceneDelegate.swift */,
@@ -489,6 +500,7 @@
 				C42190F1249C6ECC00C8668C /* RazeFaceProducts.swift in Sources */,
 				73FBE17A2B9037FE001818D4 /* PurchaseHeaderView.swift in Sources */,
 				C42190F8249C6EFB00C8668C /* MasterViewController.swift in Sources */,
+				731E6D142B96B09200946F5B /* CalculatorViewController.swift in Sources */,
 				C4656258244E4F3600BE0B61 /* BookTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -664,15 +676,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = NZC6LC8NWM;
 				INFOPLIST_FILE = Dispensado/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				INFOPLIST_KEY_CFBundleDisplayName = College;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
+				IPHONEOS_DEPLOYMENT_TARGET = 13;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 5;
+				MARKETING_VERSION = 9;
 				PRODUCT_BUNDLE_IDENTIFIER = joaoFlores.dispensado;
 				PRODUCT_NAME = College;
 				SWIFT_VERSION = 5.0;
@@ -686,15 +700,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = NZC6LC8NWM;
 				INFOPLIST_FILE = Dispensado/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				INFOPLIST_KEY_CFBundleDisplayName = College;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
+				IPHONEOS_DEPLOYMENT_TARGET = 13;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 5;
+				MARKETING_VERSION = 9;
 				PRODUCT_BUNDLE_IDENTIFIER = joaoFlores.dispensado;
 				PRODUCT_NAME = College;
 				SWIFT_VERSION = 5.0;
