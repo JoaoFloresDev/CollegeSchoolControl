@@ -172,7 +172,10 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
             return
         }
         
-        let name = nameTextField.text ?? ""
+        var name = nameTextField.text ?? "Sem nome"
+        if name.isEmpty {
+            name = "Sem nome"
+        }
         let photo = photoImage
         let lessons = Int(lessonsTextField.text ?? "0")
         let observations = obsTextView.text ?? ""
@@ -305,5 +308,6 @@ extension BookViewController: UITextViewDelegate {
 extension BookViewController: CalculatorViewControllerDelegate {
     func populateNewValue(withValue: Int) {
         lessonsTextField.text = "\(withValue)"
+        totalMiss.text = "\(withValue)"
     }
 }

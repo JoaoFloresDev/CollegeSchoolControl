@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		731E6D142B96B09200946F5B /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731E6D132B96B09200946F5B /* CalculatorViewController.swift */; };
+		7377D0CA2B9A103000E97AE3 /* PlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7377D0C92B9A103000E97AE3 /* PlaceholderView.swift */; };
 		73FBE1792B9037FE001818D4 /* PurchaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FBE1742B9037FD001818D4 /* PurchaseViewController.swift */; };
 		73FBE17A2B9037FE001818D4 /* PurchaseHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FBE1752B9037FD001818D4 /* PurchaseHeaderView.swift */; };
 		73FBE17B2B9037FE001818D4 /* DiamondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FBE1762B9037FD001818D4 /* DiamondView.swift */; };
@@ -15,12 +16,8 @@
 		73FBE17D2B9037FE001818D4 /* Purchase.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73FBE1782B9037FD001818D4 /* Purchase.storyboard */; };
 		7F1D06A05C7EE9C153C4CE7D /* Pods_College_CollegeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 728CCAEBF33286A964F7F2C9 /* Pods_College_CollegeUITests.framework */; };
 		89AE27E773ADA0F642B11FAE /* Pods_College.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B979786293A61E819C9A8C0 /* Pods_College.framework */; };
-		C42190F0249C6ECC00C8668C /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42190EB249C6ECA00C8668C /* ProductCell.swift */; };
 		C42190F1249C6ECC00C8668C /* RazeFaceProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42190EC249C6ECB00C8668C /* RazeFaceProducts.swift */; };
-		C42190F2249C6ECC00C8668C /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42190ED249C6ECB00C8668C /* DetailViewController.swift */; };
 		C42190F4249C6ECC00C8668C /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42190EF249C6ECC00C8668C /* IAPHelper.swift */; };
-		C42190F7249C6EFB00C8668C /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42190F5249C6EFA00C8668C /* WelcomeViewController.swift */; };
-		C42190F8249C6EFB00C8668C /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42190F6249C6EFA00C8668C /* MasterViewController.swift */; };
 		C44C7098249C52C600EC1E85 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C44C7097249C52C600EC1E85 /* StoreKit.framework */; };
 		C465621F244E4E4E00BE0B61 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C465621E244E4E4E00BE0B61 /* AppDelegate.swift */; };
 		C4656226244E4E4E00BE0B61 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4656224244E4E4E00BE0B61 /* Main.storyboard */; };
@@ -61,18 +58,15 @@
 		593205C9F9A17ABE2A031969 /* Pods-CollegeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollegeTests.debug.xcconfig"; path = "Target Support Files/Pods-CollegeTests/Pods-CollegeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		728CCAEBF33286A964F7F2C9 /* Pods_College_CollegeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_College_CollegeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		731E6D132B96B09200946F5B /* CalculatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorViewController.swift; sourceTree = "<group>"; };
+		7377D0C92B9A103000E97AE3 /* PlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderView.swift; sourceTree = "<group>"; };
 		73FBE1742B9037FD001818D4 /* PurchaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurchaseViewController.swift; sourceTree = "<group>"; };
 		73FBE1752B9037FD001818D4 /* PurchaseHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurchaseHeaderView.swift; sourceTree = "<group>"; };
 		73FBE1762B9037FD001818D4 /* DiamondView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiamondView.swift; sourceTree = "<group>"; };
 		73FBE1772B9037FD001818D4 /* PurchaseBenetList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurchaseBenetList.swift; sourceTree = "<group>"; };
 		73FBE1782B9037FD001818D4 /* Purchase.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Purchase.storyboard; sourceTree = "<group>"; };
 		A49CAE68556E48FA97FBE204 /* Pods-CollegeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollegeTests.release.xcconfig"; path = "Target Support Files/Pods-CollegeTests/Pods-CollegeTests.release.xcconfig"; sourceTree = "<group>"; };
-		C42190EB249C6ECA00C8668C /* ProductCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductCell.swift; sourceTree = "<group>"; };
 		C42190EC249C6ECB00C8668C /* RazeFaceProducts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RazeFaceProducts.swift; sourceTree = "<group>"; };
-		C42190ED249C6ECB00C8668C /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		C42190EF249C6ECC00C8668C /* IAPHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAPHelper.swift; sourceTree = "<group>"; };
-		C42190F5249C6EFA00C8668C /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
-		C42190F6249C6EFA00C8668C /* MasterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
 		C44C7097249C52C600EC1E85 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		C465621B244E4E4E00BE0B61 /* College.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = College.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C465621E244E4E4E00BE0B61 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -147,6 +141,24 @@
 			path = Calculator;
 			sourceTree = "<group>";
 		};
+		7377D0C72B9A0FF800E97AE3 /* BookDetail */ = {
+			isa = PBXGroup;
+			children = (
+				C4656251244E4EB200BE0B61 /* BookViewController.swift */,
+			);
+			path = BookDetail;
+			sourceTree = "<group>";
+		};
+		7377D0C82B9A101000E97AE3 /* BookTable */ = {
+			isa = PBXGroup;
+			children = (
+				C4656255244E4EFC00BE0B61 /* BookTableViewCell.swift */,
+				C4656257244E4F3600BE0B61 /* BookTableViewController.swift */,
+				7377D0C92B9A103000E97AE3 /* PlaceholderView.swift */,
+			);
+			path = BookTable;
+			sourceTree = "<group>";
+		};
 		73FBE1732B9037FD001818D4 /* Purchase */ = {
 			isa = PBXGroup;
 			children = (
@@ -162,11 +174,7 @@
 		C42190EA249C6EBB00C8668C /* Purchase */ = {
 			isa = PBXGroup;
 			children = (
-				C42190F6249C6EFA00C8668C /* MasterViewController.swift */,
-				C42190F5249C6EFA00C8668C /* WelcomeViewController.swift */,
-				C42190ED249C6ECB00C8668C /* DetailViewController.swift */,
 				C42190EF249C6ECC00C8668C /* IAPHelper.swift */,
-				C42190EB249C6ECA00C8668C /* ProductCell.swift */,
 				C42190EC249C6ECB00C8668C /* RazeFaceProducts.swift */,
 			);
 			path = Purchase;
@@ -209,14 +217,13 @@
 		C465621D244E4E4E00BE0B61 /* Dispensado */ = {
 			isa = PBXGroup;
 			children = (
-				731E6D122B96B07F00946F5B /* Calculator */,
-				73FBE1732B9037FD001818D4 /* Purchase */,
 				C465621E244E4E4E00BE0B61 /* AppDelegate.swift */,
 				C4656298244E505000BE0B61 /* SceneDelegate.swift */,
-				C4656251244E4EB200BE0B61 /* BookViewController.swift */,
 				C4656253244E4ED500BE0B61 /* BookClass.swift */,
-				C4656255244E4EFC00BE0B61 /* BookTableViewCell.swift */,
-				C4656257244E4F3600BE0B61 /* BookTableViewController.swift */,
+				731E6D122B96B07F00946F5B /* Calculator */,
+				73FBE1732B9037FD001818D4 /* Purchase */,
+				7377D0C72B9A0FF800E97AE3 /* BookDetail */,
+				7377D0C82B9A101000E97AE3 /* BookTable */,
 				C4656224244E4E4E00BE0B61 /* Main.storyboard */,
 				C465622A244E4E4F00BE0B61 /* Assets.xcassets */,
 				C465622C244E4E4F00BE0B61 /* LaunchScreen.storyboard */,
@@ -491,15 +498,12 @@
 				73FBE1792B9037FE001818D4 /* PurchaseViewController.swift in Sources */,
 				C42190F4249C6ECC00C8668C /* IAPHelper.swift in Sources */,
 				C4656254244E4ED500BE0B61 /* BookClass.swift in Sources */,
-				C42190F7249C6EFB00C8668C /* WelcomeViewController.swift in Sources */,
 				73FBE17C2B9037FE001818D4 /* PurchaseBenetList.swift in Sources */,
+				7377D0CA2B9A103000E97AE3 /* PlaceholderView.swift in Sources */,
 				C465621F244E4E4E00BE0B61 /* AppDelegate.swift in Sources */,
-				C42190F0249C6ECC00C8668C /* ProductCell.swift in Sources */,
 				C4656256244E4EFD00BE0B61 /* BookTableViewCell.swift in Sources */,
-				C42190F2249C6ECC00C8668C /* DetailViewController.swift in Sources */,
 				C42190F1249C6ECC00C8668C /* RazeFaceProducts.swift in Sources */,
 				73FBE17A2B9037FE001818D4 /* PurchaseHeaderView.swift in Sources */,
-				C42190F8249C6EFB00C8668C /* MasterViewController.swift in Sources */,
 				731E6D142B96B09200946F5B /* CalculatorViewController.swift in Sources */,
 				C4656258244E4F3600BE0B61 /* BookTableViewController.swift in Sources */,
 			);
@@ -676,7 +680,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = NZC6LC8NWM;
 				INFOPLIST_FILE = Dispensado/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = College;
@@ -686,7 +690,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 9;
+				MARKETING_VERSION = 10;
 				PRODUCT_BUNDLE_IDENTIFIER = joaoFlores.dispensado;
 				PRODUCT_NAME = College;
 				SWIFT_VERSION = 5.0;
@@ -700,7 +704,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = NZC6LC8NWM;
 				INFOPLIST_FILE = Dispensado/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = College;
@@ -710,7 +714,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 9;
+				MARKETING_VERSION = 10;
 				PRODUCT_BUNDLE_IDENTIFIER = joaoFlores.dispensado;
 				PRODUCT_NAME = College;
 				SWIFT_VERSION = 5.0;

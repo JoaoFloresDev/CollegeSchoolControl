@@ -17,7 +17,13 @@ class BookTableViewController: UITableViewController {
     @IBOutlet weak var premiumView: UIView!
     
     var books = [BookClass]()
-
+    
+    lazy var placeholderImageView = PlaceholderView(
+        title: "Boas aulas!",
+        subtitle: "Adicione novas matérias clicando no botão +",
+        image: UIImage(named: "placeholder")
+    )
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         if #available(iOS 13.0, *) {
@@ -32,9 +38,45 @@ class BookTableViewController: UITableViewController {
         
         let botaoEsquerda = UIBarButtonItem(title: "Pro", style: .plain, target: self, action: #selector(açãoDoBotãoEsquerda))
         self.navigationItem.leftBarButtonItem = botaoEsquerda
+        
+        if !(RazeFaceProducts.store.isProductPurchased("NoAds.College") || (UserDefaults.standard.object(forKey: "NoAds.College") != nil)) {
+            if check30DaysPassed() {
+                açãoDoBotãoEsquerda()
+            }
+        }
+        
+        self.tableView.backgroundView = placeholderImageView
+        placeholderImageView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(240)
+            make.centerX.equalToSuperview()
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        addBackgroundIfNeed()
     }
 
-    @objc 
+    func saveTodayDate() {
+        let now = Date()
+        UserDefaults.standard.set(now, forKey: "LastSavedDate")
+    }
+
+    func check30DaysPassed() -> Bool {
+        if let lastSavedDate = UserDefaults.standard.object(forKey: "LastSavedDate") as? Date {
+            let dayDifference = Calendar.current.dateComponents([.day], from: lastSavedDate, to: Date()).day ?? 0
+            if dayDifference >= 14 {
+                saveTodayDate()
+                return true
+            } else {
+                return false
+            }
+        }
+        saveTodayDate()
+        return false
+    }
+    
+    @objc
     func açãoDoBotãoEsquerda() {
         let storyboard = UIStoryboard(name: "Purchase",bundle: nil)
         let purchaseVC = storyboard.instantiateViewController(withIdentifier: "Purchase")
@@ -128,9 +170,18 @@ class BookTableViewController: UITableViewController {
             books.remove(at: indexPath.row)
             saveBooks()
             tableView.deleteRows(at: [indexPath], with: .fade)
+            addBackgroundIfNeed()
         }
     }
 
+    func addBackgroundIfNeed() {
+        if books.isEmpty {
+            placeholderImageView.isHidden = false
+        } else {
+            placeholderImageView.isHidden = true
+        }
+    }
+    
     //MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
