@@ -6,13 +6,85 @@
 //  Copyright © 2019 Joao Flores. All rights reserved.
 //
 
+import AVFoundation
+import Photos
 import UIKit
 import os.log
-import StoreKit
 import GoogleMobileAds
+import SnapKit
+
+extension BookViewController: UICollectionViewDelegate, UICollectionViewDataSource, CustomCollectionViewCellDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return (book?.imagePaths.count ?? 0) + 1 // +1 para o ícone de adicionar
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CustomCollectionViewCell", for: indexPath) as! CustomCollectionViewCell
+        
+        cell.delegate = self
+        cell.indexPath = indexPath
+        
+        if indexPath.item == 0 {
+            // Exibir o ícone de adição na primeira célula
+            cell.imageView.image = UIImage(systemName: "plus.circle")
+            cell.imageView.tintColor = .systemBlue
+            cell.imageView.contentMode = .scaleAspectFit
+        } else {
+            // Carregar a imagem associada ao caminho de imagem salvo
+            if let imagePath = book?.imagePaths[indexPath.item - 1], let image = loadImage(from: imagePath) {
+                cell.imageView.image = image
+            } else {
+                cell.imageView.image = UIImage(named: "premiumIcon") // Imagem placeholder
+            }
+        }
+        
+        return cell
+    }
+    
+    // Delegate que será chamado quando a célula for clicada
+    func didTapCell(at indexPath: IndexPath) {
+        if indexPath.item == 0 {
+            presentImagePickerOptions() // Abrir opções para escolher uma imagem
+        } else {
+            print("Item \(indexPath.item) selecionado")
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.item == 0 {
+            presentImagePickerOptions()
+        } else {
+            print("Item \(indexPath.item) selecionado")
+        }
+    }
+    
+    // Abre a câmera
+    private func openCamera() {
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            let imagePickerController = UIImagePickerController()
+            imagePickerController.sourceType = .camera
+            imagePickerController.delegate = self
+            imagePickerController.allowsEditing = true
+            present(imagePickerController, animated: true, completion: nil)
+        } else {
+            print("Câmera não disponível")
+        }
+    }
+    
+    private func openPhotoLibrary() {
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+            let imagePickerController = UIImagePickerController()
+            imagePickerController.sourceType = .photoLibrary
+            imagePickerController.delegate = self
+            imagePickerController.allowsEditing = true
+            present(imagePickerController, animated: true, completion: nil)
+        }
+    }
+}
 
 class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, GADInterstitialDelegate {
-    
+    var images: [UIImage?] = Array(repeating: nil, count: 10)
     //MARK: Properties
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var photoImageView: UIImageView!
@@ -32,10 +104,70 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
     var currentMiss = 0
     var maxMiss = 0
     
+//    lazy var collectionView: UICollectionView = {
+//        let layout = UICollectionViewFlowLayout()
+//        layout.scrollDirection = .horizontal
+//        layout.minimumLineSpacing = 10
+//        layout.itemSize = CGSize(width: 100, height: 100)
+//        
+//        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+//        collectionView.delegate = self
+//        collectionView.dataSource = self
+//        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+//        collectionView.backgroundColor = .clear
+//        return collectionView
+//    }()
+    
     var book: BookClass?
     var interstitial: GADInterstitial!
     var firstAdd = true
     var photoImage: UIImage?
+    
+    
+    lazy var collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        layout.minimumLineSpacing = 10
+        layout.itemSize = CGSize(width: 100, height: 100)
+        
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(CustomCollectionViewCell.self, forCellWithReuseIdentifier: "CustomCollectionViewCell")
+        collectionView.backgroundColor = .clear
+        return collectionView
+    }()
+    
+    // Carregar a imagem a partir de um caminho
+    private func loadImage(from imagePath: String) -> UIImage? {
+        let fileURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent(imagePath)
+        return UIImage(contentsOfFile: fileURL.path)
+    }
+    
+    // Salvar a imagem no sistema de arquivos
+    private func saveImage(_ image: UIImage) -> String? {
+        guard let data = image.jpegData(compressionQuality: 0.8) else { return nil }
+        let fileName = UUID().uuidString + ".jpg"
+        let fileURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent(fileName)
+        do {
+            try data.write(to: fileURL)
+            return fileName
+        } catch {
+            print("Erro ao salvar imagem:", error)
+            return nil
+        }
+    }
+    
+    // Salvar imagem selecionada
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        if let selectedImage = info[.editedImage] as? UIImage ?? info[.originalImage] as? UIImage {
+            if let imagePath = saveImage(selectedImage) {
+                book?.imagePaths.append(imagePath)
+                collectionView.reloadData() // Atualizar a collection view
+            }
+        }
+        dismiss(animated: true, completion: nil)
+    }
     
     func createAndLoadInterstitial() -> GADInterstitial {
         let interstitial = GADInterstitial(adUnitID: "ca-app-pub-8858389345934911/2509258121")
@@ -56,6 +188,35 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
     }()
     
     //    MARK: - LifeCycle
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if RazeFaceProducts.store.isProductPurchased("NoAds.College") || (UserDefaults.standard.object(forKey: "NoAds.College") != nil) {
+            print("comprado")
+        } else {
+            let launchCountKey = "launchCount"
+            var launchCount = UserDefaults.standard.integer(forKey: launchCountKey)
+            launchCount += 1
+            UserDefaults.standard.set(launchCount, forKey: launchCountKey)
+            
+            if launchCount >= 5 {
+                if interstitial.isReady {
+                    interstitial.present(fromRootViewController: self)
+                    UserDefaults.standard.set(0, forKey: launchCountKey)
+                }
+            }
+        }
+    }
+    
+    private func setupCollectionView() {
+        view.addSubview(collectionView)
+        collectionView.snp.makeConstraints { make in
+            make.top.equalTo(dividerBar.snp.bottom).offset(20)
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.height.equalTo(120)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -104,10 +265,15 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
             make.trailing.equalToSuperview().offset(-16)
         }
         doneButton.addTarget(self, action: #selector(doneButtonTapped), for: .touchUpInside)
+        collectionView.register(CustomCollectionViewCell.self, forCellWithReuseIdentifier: "CustomCollectionViewCell")
+        setupCollectionView()
+        collectionView.isUserInteractionEnabled = true
+        
     }
     
     @objc private func doneButtonTapped() {
         let controller = CalculatorViewController()
+        dismissKeyboardFunc()
         controller.delegate = self
         let navigation = UINavigationController(rootViewController: controller)
         present(navigation, animated: true)
@@ -133,20 +299,6 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
     
     //MARK: - UIImagePickerControllerDelegate
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        dismiss(animated: true, completion: nil)
-    }
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        
-        var image : UIImage!
-        
-        if let img = info[UIImagePickerController.InfoKey.editedImage] as? UIImage
-        {   image = img    }
-        else if let img = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
-        {   image = img    }
-        photoImage = image
-        photoImageView.image = image
-        
         dismiss(animated: true, completion: nil)
     }
     
@@ -177,17 +329,19 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
             name = "Sem nome"
         }
         let photo = photoImage
-        let lessons = Int(lessonsTextField.text ?? "0")
+        let lessons = Int(lessonsTextField.text ?? "0") ?? 0
         let observations = obsTextView.text ?? ""
-        maxMiss = Int(Double(lessons ?? 0))
+        maxMiss = Int(Double(lessons))
+
+        // Passando os valores corretos para imagePaths
+        let imagePaths = book?.imagePaths ?? []
         
-        book = BookClass(name: name, photo: photo, currentMiss: currentMiss, maxMiss: maxMiss, lessons: lessons ?? 0, observations: observations)
-        
-        if #available(iOS 10.3, *) {
-            SKStoreReviewController.requestReview()
-        }
+        // Atualizando o objeto book com as novas informações
+        book = BookClass(name: name, photo: photo, currentMiss: currentMiss, maxMiss: maxMiss, lessons: lessons, observations: observations, imagePaths: imagePaths)
+
+        SKStoreReviewController.requestReview()
     }
-    
+
     //MARK: - Actions
     @IBAction func selectImageFromPhotoLibrary(_ sender: UITapGestureRecognizer) {
         
@@ -234,14 +388,6 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
             missTextField.textColor = UIColor.black
             totalMiss.textColor = UIColor.black
             dividerBar.textColor = UIColor.black
-        }
-        
-        if(RazeFaceProducts.store.isProductPurchased("NoAds.College") || (UserDefaults.standard.object(forKey: "NoAds.College") != nil)) {
-            print("comprado")
-        }
-        else if interstitial.isReady && firstAdd {
-          interstitial.present(fromRootViewController: self)
-            firstAdd = false
         }
     }
     
@@ -309,5 +455,109 @@ extension BookViewController: CalculatorViewControllerDelegate {
     func populateNewValue(withValue: Int) {
         lessonsTextField.text = "\(withValue)"
         totalMiss.text = "\(withValue)"
+    }
+}
+
+extension BookViewController {
+    private func presentImagePickerOptions() {
+        DispatchQueue.main.async {
+            let alertController = UIAlertController(title: "Escolha uma opção", message: nil, preferredStyle: .actionSheet)
+            
+            let cameraAction = UIAlertAction(title: "Tirar Foto", style: .default) { _ in
+                self.openCameraWithPermission()
+            }
+            
+            let galleryAction = UIAlertAction(title: "Escolher da Galeria", style: .default) { _ in
+                self.openPhotoLibraryWithPermission()
+            }
+            
+            let cancelAction = UIAlertAction(title: "Cancelar", style: .cancel, handler: nil)
+            
+            alertController.addAction(cameraAction)
+            alertController.addAction(galleryAction)
+            alertController.addAction(cancelAction)
+            
+            self.present(alertController, animated: true, completion: nil)
+        }
+    }
+    
+    private func checkCameraPermission(completion: @escaping (Bool) -> Void) {
+        let cameraAuthorizationStatus = AVCaptureDevice.authorizationStatus(for: .video)
+        
+        switch cameraAuthorizationStatus {
+        case .authorized:
+            // Acesso já concedido
+            completion(true)
+        case .notDetermined:
+            // O usuário ainda não foi solicitado, pedimos a permissão
+            AVCaptureDevice.requestAccess(for: .video) { granted in
+                completion(granted)
+            }
+        case .denied, .restricted:
+            // Acesso negado ou restrito
+            completion(false)
+        @unknown default:
+            completion(false)
+        }
+    }
+    
+    private func checkPhotoLibraryPermission(completion: @escaping (Bool) -> Void) {
+        let photoAuthorizationStatus = PHPhotoLibrary.authorizationStatus()
+        
+        switch photoAuthorizationStatus {
+        case .authorized:
+            // Acesso já concedido
+            completion(true)
+        case .notDetermined:
+            // O usuário ainda não foi solicitado, pedimos a permissão
+            PHPhotoLibrary.requestAuthorization { status in
+                completion(status == .authorized)
+            }
+        case .denied, .restricted:
+            // Acesso negado ou restrito
+            completion(false)
+        @unknown default:
+            completion(false)
+        }
+    }
+    
+    // Abre a câmera se a permissão foi concedida
+    private func openCameraWithPermission() {
+        checkCameraPermission { granted in
+            DispatchQueue.main.async {
+                if granted {
+                    self.openCamera()
+                } else {
+                    self.showPermissionDeniedAlert(for: "Câmera")
+                }
+            }
+        }
+    }
+    
+    // Abre a galeria se a permissão foi concedida
+    private func openPhotoLibraryWithPermission() {
+        checkPhotoLibraryPermission { granted in
+            DispatchQueue.main.async {
+                if granted {
+                    self.openPhotoLibrary()
+                } else {
+                    self.showPermissionDeniedAlert(for: "Galeria de Fotos")
+                }
+            }
+        }
+    }
+    
+    // Mostra alerta informando que a permissão foi negada
+    private func showPermissionDeniedAlert(for feature: String) {
+        let alert = UIAlertController(title: "\(feature) Acesso Negado",
+                                      message: "Por favor, permita o acesso à \(feature) nas configurações do dispositivo.",
+                                      preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Abrir Configurações", style: .default) { _ in
+            if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
+                UIApplication.shared.open(settingsURL, options: [:], completionHandler: nil)
+            }
+        })
+        alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
 }
