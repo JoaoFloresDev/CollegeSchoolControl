@@ -27,7 +27,7 @@ class CustomCollectionViewCell: UICollectionViewCell {
         imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 10
         imageView.layer.masksToBounds = true
-        imageView.isUserInteractionEnabled = true
+        imageView.clipsToBounds = true // Garante que a imagem não ultrapasse os limites
         return imageView
     }()
     
@@ -37,7 +37,7 @@ class CustomCollectionViewCell: UICollectionViewCell {
         
         // Configuração do layout com SnapKit
         imageView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.edges.equalToSuperview() // Garante que o imageView preencha toda a célula
         }
         
         // Adicionar gesto de toque à célula
@@ -62,3 +62,4 @@ class CustomCollectionViewCell: UICollectionViewCell {
         super.init(coder: coder)
     }
 }
+

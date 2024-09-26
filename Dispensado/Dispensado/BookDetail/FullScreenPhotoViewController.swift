@@ -82,7 +82,6 @@ class FullScreenPhotoViewController: UIViewController, UIScrollViewDelegate {
             make.top.equalTo(view.safeAreaLayoutGuide).offset(16)
             make.trailing.equalToSuperview().offset(-16)
         }
-        
     }
     
     // Método para fazer o zoom com o double tap

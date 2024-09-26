@@ -165,10 +165,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N1f-N8-ovY">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="874"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
                                         <subviews>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" indicatorStyle="black" maximumZoomScale="3" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="bEP-sj-rl4">
-                                                <rect key="frame" x="20" y="398" width="374" height="456"/>
+                                                <rect key="frame" x="20" y="410" width="374" height="456"/>
                                                 <color key="backgroundColor" red="1" green="0.96254017420000004" blue="0.57682183679999999" alpha="0.76900617360000001" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="456" id="W4S-J4-awc"/>
@@ -187,7 +187,7 @@
                                                 <textInputTraits key="textInputTraits" keyboardAppearance="alert" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notas de aula" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="obe-Zy-P2f">
-                                                <rect key="frame" x="20" y="358" width="123" height="30"/>
+                                                <rect key="frame" x="20" y="370" width="123" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="arM-oO-iI1"/>
                                                 </constraints>
@@ -285,7 +285,7 @@
                                             <constraint firstItem="lVI-i2-vxD" firstAttribute="leading" secondItem="N1f-N8-ovY" secondAttribute="leading" constant="110" id="4l0-5K-Pdh"/>
                                             <constraint firstItem="i1k-fo-Ckh" firstAttribute="leading" secondItem="N1f-N8-ovY" secondAttribute="leading" id="6Gv-Gu-CXq"/>
                                             <constraint firstItem="iCF-Wp-JeI" firstAttribute="top" secondItem="lVI-i2-vxD" secondAttribute="bottom" constant="12" id="85p-Fd-zQb"/>
-                                            <constraint firstItem="obe-Zy-P2f" firstAttribute="top" secondItem="i1k-fo-Ckh" secondAttribute="bottom" constant="130" id="CPL-eV-Vfi"/>
+                                            <constraint firstItem="obe-Zy-P2f" firstAttribute="top" secondItem="i1k-fo-Ckh" secondAttribute="bottom" constant="142" id="CPL-eV-Vfi"/>
                                             <constraint firstItem="lVI-i2-vxD" firstAttribute="leading" secondItem="WuX-Z5-0nZ" secondAttribute="trailing" constant="8" id="DKq-mC-29a"/>
                                             <constraint firstItem="obe-Zy-P2f" firstAttribute="leading" secondItem="N1f-N8-ovY" secondAttribute="leading" constant="20" id="H1t-58-OGJ"/>
                                             <constraint firstItem="uMO-bc-E0r" firstAttribute="centerY" secondItem="iCF-Wp-JeI" secondAttribute="centerY" id="ITd-6h-An4"/>

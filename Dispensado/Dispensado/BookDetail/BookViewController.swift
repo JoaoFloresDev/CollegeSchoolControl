@@ -14,11 +14,6 @@ import GoogleMobileAds
 import SnapKit
 import PhotosUI
 
-// Atualize seu método para abrir a galeria com múltipla seleção usando PHPickerViewController
-
-
-// Implementação do delegate PHPickerViewController
-@available(iOS 14, *)
 extension BookViewController: PHPickerViewControllerDelegate {
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         picker.dismiss(animated: true, completion: nil)
@@ -49,39 +44,34 @@ extension BookViewController: PHPickerViewControllerDelegate {
         }
     }
 
-    // Função para permitir tirar múltiplas fotos
     private func takeMultiplePhotos() {
-        let alertController = UIAlertController(title: "Tirar outra foto?", message: nil, preferredStyle: .alert)
-        
-        let takePhotoAction = UIAlertAction(title: "Sim", style: .default) { _ in
-            if UIImagePickerController.isSourceTypeAvailable(.camera) {
-                let imagePickerController = UIImagePickerController()
-                imagePickerController.sourceType = .camera
-                imagePickerController.delegate = self
-                imagePickerController.allowsEditing = true
-                self.present(imagePickerController, animated: true, completion: nil)
-            }
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            let imagePickerController = UIImagePickerController()
+            imagePickerController.sourceType = .camera
+            imagePickerController.delegate = self
+            self.present(imagePickerController, animated: true, completion: nil)
         }
         
-        let finishAction = UIAlertAction(title: "Finalizar", style: .cancel, handler: nil)
-        
-        alertController.addAction(takePhotoAction)
-        alertController.addAction(finishAction)
-        
-        present(alertController, animated: true, completion: nil)
     }
 
-    // Modifique o delegate do UIImagePickerController para permitir tirar múltiplas fotos
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         if let selectedImage = info[.editedImage] as? UIImage ?? info[.originalImage] as? UIImage {
             if let imagePath = saveImage(selectedImage) {
                 book?.imagePaths.append(imagePath)
-                collectionView.reloadData() // Atualizar a collection view
+                collectionView.reloadData()
             }
         }
         dismiss(animated: true) {
-            // Reabrir a câmera para tirar outra foto
-            self.takeMultiplePhotos()
+            let alertController = UIAlertController(title: "Tirar outra foto?", message: nil, preferredStyle: .alert)
+            
+            let takePhotoAction = UIAlertAction(title: "Sim", style: .default) { _ in
+                self.takeMultiplePhotos()
+            }
+            let finishAction = UIAlertAction(title: "Finalizar", style: .cancel, handler: nil)
+            alertController.addAction(takePhotoAction)
+            alertController.addAction(finishAction)
+            
+            self.present(alertController, animated: true, completion: nil)
         }
     }
 }
@@ -97,32 +87,31 @@ extension BookViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         cell.delegate = self
         cell.indexPath = indexPath
-        
+
         if indexPath.item == 0 {
-            // Exibir o ícone de adição na primeira célula
-            cell.imageView.image = UIImage(systemName: "plus.circle")
+            cell.imageView.image = UIImage(systemName: "photo.badge.plus")
             cell.imageView.tintColor = .systemBlue
             cell.imageView.contentMode = .scaleAspectFit
         } else {
-            // Carregar a imagem associada ao caminho de imagem salvo
             if let imagePath = book?.imagePaths[indexPath.item - 1], let image = loadImage(from: imagePath) {
                 cell.imageView.image = image
+                cell.imageView.contentMode = .scaleAspectFill
             } else {
-                cell.imageView.image = UIImage(named: "premiumIcon") // Imagem placeholder
+                cell.imageView.image = UIImage(named: "premiumIcon")
+                cell.imageView.contentMode = .scaleAspectFit
             }
         }
         
         return cell
     }
+
     
-    // Delegate que será chamado quando a célula for clicada
     func didTapCell(at indexPath: IndexPath) {
         if indexPath.item == 0 {
             presentImagePickerOptions() // Abrir opções para escolher uma imagem
         } else {
             guard let book = book else { return }
             
-            // Prepare a lista de imagens para exibir em tela cheia
             var images: [UIImage] = []
             for imagePath in book.imagePaths {
                 if let image = loadImage(from: imagePath) {
@@ -130,7 +119,6 @@ extension BookViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 }
             }
             
-            // Apresentar a tela de visualização em tela cheia com swipe horizontal
             let photoPageVC = PhotoPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
             photoPageVC.images = images
             photoPageVC.currentIndex = indexPath.item - 1 // Exclui a célula de "adicionar foto"
@@ -154,7 +142,6 @@ extension BookViewController: UICollectionViewDelegate, UICollectionViewDataSour
             let imagePickerController = UIImagePickerController()
             imagePickerController.sourceType = .camera
             imagePickerController.delegate = self
-//            imagePickerController.allowsEditing = true
             present(imagePickerController, animated: true, completion: nil)
         } else {
             print("Câmera não disponível")
@@ -166,7 +153,6 @@ extension BookViewController: UICollectionViewDelegate, UICollectionViewDataSour
             let imagePickerController = UIImagePickerController()
             imagePickerController.sourceType = .photoLibrary
             imagePickerController.delegate = self
-//            imagePickerController.allowsEditing = true
             present(imagePickerController, animated: true, completion: nil)
         }
     }
@@ -198,12 +184,20 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
     var firstAdd = true
     var photoImage: UIImage?
     
+    private let photosLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Fotos da Aula"
+        label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        label.textColor = .black
+        label.textAlignment = .left
+        return label
+    }()
     
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 10
-        layout.itemSize = CGSize(width: 100, height: 100)
+        layout.itemSize = CGSize(width: 80, height: 80)
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.delegate = self
@@ -233,17 +227,6 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
         }
     }
     
-    // Salvar imagem selecionada
-//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-//        if let selectedImage = info[.editedImage] as? UIImage ?? info[.originalImage] as? UIImage {
-//            if let imagePath = saveImage(selectedImage) {
-//                book?.imagePaths.append(imagePath)
-//                collectionView.reloadData() // Atualizar a collection view
-//            }
-//        }
-//        dismiss(animated: true, completion: nil)
-//    }
-//    
     func createAndLoadInterstitial() -> GADInterstitial {
         let interstitial = GADInterstitial(adUnitID: "ca-app-pub-8858389345934911/2509258121")
         interstitial.delegate = self
@@ -284,11 +267,17 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
     }
     
     private func setupCollectionView() {
+        view.addSubview(photosLabel)
+        photosLabel.snp.makeConstraints { make in
+            make.top.equalTo(dividerBar.snp.bottom).offset(30)
+            make.leading.equalToSuperview().inset(16)
+        }
+        
         view.addSubview(collectionView)
         collectionView.snp.makeConstraints { make in
-            make.top.equalTo(dividerBar.snp.bottom).offset(20)
+            make.top.equalTo(photosLabel.snp.bottom).offset(4)
             make.leading.trailing.equalToSuperview().inset(16)
-            make.height.equalTo(120)
+            make.height.equalTo(100)
         }
     }
     
@@ -607,33 +596,7 @@ extension BookViewController {
             }
         }
     }
-    // Abre a câmera se a permissão foi concedida
-//    private func openCameraWithPermission() {
-//        checkCameraPermission { granted in
-//            DispatchQueue.main.async {
-//                if granted {
-//                    self.openCamera()
-//                } else {
-//                    self.showPermissionDeniedAlert(for: "Câmera")
-//                }
-//            }
-//        }
-//    }
-//    
-//    // Abre a galeria se a permissão foi concedida
-//    private func openPhotoLibraryWithPermission() {
-//        checkPhotoLibraryPermission { granted in
-//            DispatchQueue.main.async {
-//                if granted {
-//                    self.openPhotoLibrary()
-//                } else {
-//                    self.showPermissionDeniedAlert(for: "Galeria de Fotos")
-//                }
-//            }
-//        }
-//    }
     
-    // Mostra alerta informando que a permissão foi negada
     private func showPermissionDeniedAlert(for feature: String) {
         let alert = UIAlertController(title: "\(feature) Acesso Negado",
                                       message: "Por favor, permita o acesso à \(feature) nas configurações do dispositivo.",
