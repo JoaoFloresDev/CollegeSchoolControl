@@ -1,5 +1,6 @@
 # Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
+platform :ios, '12.0'
+
 
 target 'College' do
   # Comment the next line if you don't want to use dynamic frameworks
@@ -8,6 +9,10 @@ target 'College' do
   # Pods for College
   pod 'Google-Mobile-Ads-SDK'
   pod 'SnapKit' 
+pod 'ImageSlideshow', '~> 1.8'
+pod 'ImageSlideshow/SDWebImage'  # Para suporte a imagens remotas
+
+
   target 'CollegeTests' do
     inherit! :search_paths
     # Pods for testing

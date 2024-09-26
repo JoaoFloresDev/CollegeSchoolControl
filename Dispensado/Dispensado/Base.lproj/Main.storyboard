@@ -179,7 +179,7 @@
                                                 <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES"/>
                                             </textView>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Nome da matéria" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="lVI-i2-vxD" userLabel="Name Text Field">
-                                                <rect key="frame" x="104" y="20" width="290" height="37"/>
+                                                <rect key="frame" x="110" y="20" width="280" height="37"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="37" id="hOM-5k-64V"/>
                                                 </constraints>
@@ -195,16 +195,6 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <imageView contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="320" image="IconPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="2ZD-Zx-Opt">
-                                                <rect key="frame" x="16" y="20" width="74" height="74"/>
-                                                <gestureRecognizers/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" secondItem="2ZD-Zx-Opt" secondAttribute="height" multiplier="1:1" id="AuK-m4-YVT"/>
-                                                </constraints>
-                                                <connections>
-                                                    <outletCollection property="gestureRecognizers" destination="1Gm-nP-7x0" appends="YES" id="uBy-Xd-iEK"/>
-                                                </connections>
-                                            </imageView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i1k-fo-Ckh">
                                                 <rect key="frame" x="0.0" y="162" width="414" height="66"/>
                                                 <subviews>
@@ -268,34 +258,49 @@
                                                 </constraints>
                                             </view>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Máximo de Faltas" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="iCF-Wp-JeI">
-                                                <rect key="frame" x="104" y="69" width="290" height="37"/>
+                                                <rect key="frame" x="110" y="69" width="280" height="37"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="37" id="fCy-Ti-jlF"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad" keyboardAppearance="alert" returnKeyType="done"/>
                                             </textField>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Matéria" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WuX-Z5-0nZ">
+                                                <rect key="frame" x="16" y="28" width="86" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Max. Faltas" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uMO-bc-E0r">
+                                                <rect key="frame" x="16" y="77" width="86" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemGray6Color"/>
                                         <constraints>
-                                            <constraint firstItem="2ZD-Zx-Opt" firstAttribute="leading" secondItem="N1f-N8-ovY" secondAttribute="leading" constant="16" id="1FF-IX-CGW"/>
                                             <constraint firstAttribute="bottom" secondItem="bEP-sj-rl4" secondAttribute="bottom" constant="20" id="1P7-Qe-Wkf"/>
                                             <constraint firstItem="bEP-sj-rl4" firstAttribute="top" secondItem="obe-Zy-P2f" secondAttribute="bottom" constant="10" id="4Jz-A0-8Ak"/>
+                                            <constraint firstItem="lVI-i2-vxD" firstAttribute="leading" secondItem="N1f-N8-ovY" secondAttribute="leading" constant="110" id="4l0-5K-Pdh"/>
                                             <constraint firstItem="i1k-fo-Ckh" firstAttribute="leading" secondItem="N1f-N8-ovY" secondAttribute="leading" id="6Gv-Gu-CXq"/>
                                             <constraint firstItem="iCF-Wp-JeI" firstAttribute="top" secondItem="lVI-i2-vxD" secondAttribute="bottom" constant="12" id="85p-Fd-zQb"/>
                                             <constraint firstItem="obe-Zy-P2f" firstAttribute="top" secondItem="i1k-fo-Ckh" secondAttribute="bottom" constant="130" id="CPL-eV-Vfi"/>
+                                            <constraint firstItem="lVI-i2-vxD" firstAttribute="leading" secondItem="WuX-Z5-0nZ" secondAttribute="trailing" constant="8" id="DKq-mC-29a"/>
                                             <constraint firstItem="obe-Zy-P2f" firstAttribute="leading" secondItem="N1f-N8-ovY" secondAttribute="leading" constant="20" id="H1t-58-OGJ"/>
+                                            <constraint firstItem="uMO-bc-E0r" firstAttribute="centerY" secondItem="iCF-Wp-JeI" secondAttribute="centerY" id="ITd-6h-An4"/>
                                             <constraint firstAttribute="trailing" secondItem="bEP-sj-rl4" secondAttribute="trailing" constant="20" id="Ihe-t5-QTk"/>
                                             <constraint firstItem="i1k-fo-Ckh" firstAttribute="top" secondItem="iCF-Wp-JeI" secondAttribute="bottom" constant="56" id="JaE-D5-qGv"/>
-                                            <constraint firstAttribute="trailing" secondItem="lVI-i2-vxD" secondAttribute="trailing" constant="20" id="Pxm-8k-kMD"/>
+                                            <constraint firstAttribute="trailing" secondItem="lVI-i2-vxD" secondAttribute="trailing" constant="24" id="Pxm-8k-kMD"/>
                                             <constraint firstAttribute="trailing" secondItem="i1k-fo-Ckh" secondAttribute="trailing" id="Pzm-L1-IDc"/>
-                                            <constraint firstItem="lVI-i2-vxD" firstAttribute="leading" secondItem="2ZD-Zx-Opt" secondAttribute="trailing" constant="14" id="Sig-kO-yfP"/>
-                                            <constraint firstAttribute="trailing" secondItem="iCF-Wp-JeI" secondAttribute="trailing" constant="20" id="dzc-8F-kFf"/>
-                                            <constraint firstItem="iCF-Wp-JeI" firstAttribute="leading" secondItem="2ZD-Zx-Opt" secondAttribute="trailing" constant="14" id="hZo-e9-tfr"/>
-                                            <constraint firstItem="2ZD-Zx-Opt" firstAttribute="top" secondItem="N1f-N8-ovY" secondAttribute="top" constant="20" id="qJY-S7-ado"/>
+                                            <constraint firstItem="iCF-Wp-JeI" firstAttribute="leading" secondItem="uMO-bc-E0r" secondAttribute="trailing" constant="8" symbolic="YES" id="QE5-7I-tGD"/>
+                                            <constraint firstItem="uMO-bc-E0r" firstAttribute="leading" secondItem="N1f-N8-ovY" secondAttribute="leading" constant="16" id="VDy-aa-buW"/>
+                                            <constraint firstItem="iCF-Wp-JeI" firstAttribute="leading" secondItem="N1f-N8-ovY" secondAttribute="leading" constant="110" id="Xpz-h3-bzx"/>
+                                            <constraint firstItem="WuX-Z5-0nZ" firstAttribute="centerY" secondItem="lVI-i2-vxD" secondAttribute="centerY" id="bBP-Bx-BBK"/>
+                                            <constraint firstAttribute="trailing" secondItem="iCF-Wp-JeI" secondAttribute="trailing" constant="24" id="dzc-8F-kFf"/>
+                                            <constraint firstItem="WuX-Z5-0nZ" firstAttribute="leading" secondItem="N1f-N8-ovY" secondAttribute="leading" constant="16" id="g1p-Q3-yEN"/>
                                             <constraint firstItem="lVI-i2-vxD" firstAttribute="top" secondItem="N1f-N8-ovY" secondAttribute="top" constant="20" id="svn-nF-JXV"/>
                                             <constraint firstItem="bEP-sj-rl4" firstAttribute="leading" secondItem="N1f-N8-ovY" secondAttribute="leading" constant="20" id="tSa-sQ-dnK"/>
-                                            <constraint firstItem="2ZD-Zx-Opt" firstAttribute="baseline" secondItem="iCF-Wp-JeI" secondAttribute="firstBaseline" id="ymV-xv-ps2"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -320,20 +325,25 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Nova Matéria" id="A3N-EO-FRO">
-                        <barButtonItem key="rightBarButtonItem" title="Salvar" id="ClT-MO-tig">
+                        <barButtonItem key="leftBarButtonItem" title="Voltar" id="ClT-MO-tig">
                             <connections>
                                 <segue destination="4dm-ml-iqy" kind="unwind" unwindAction="unwindToBookListWithSender:" id="Npd-PX-Woi"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Salvar" id="9yc-Gl-5e2">
+                            <connections>
+                                <segue destination="4dm-ml-iqy" kind="unwind" unwindAction="unwindToBookListWithSender:" id="epV-rU-9Kp"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="bottomConstraint" destination="1P7-Qe-Wkf" id="E2a-6L-qB5"/>
+                        <outlet property="createButton" destination="9yc-Gl-5e2" id="xIZ-zd-tNo"/>
                         <outlet property="dividerBar" destination="Pkb-KJ-Zj8" id="RJF-nj-6gG"/>
                         <outlet property="lessonsTextField" destination="iCF-Wp-JeI" id="8Vg-xh-hKb"/>
                         <outlet property="missTextField" destination="zz8-7M-fk7" id="vLS-FU-gwt"/>
                         <outlet property="nameTextField" destination="lVI-i2-vxD" id="oU8-F5-ifD"/>
                         <outlet property="obsTextView" destination="bEP-sj-rl4" id="4t5-37-UzS"/>
-                        <outlet property="photoImageView" destination="2ZD-Zx-Opt" id="Bti-jB-o4O"/>
                         <outlet property="saveButton" destination="ClT-MO-tig" id="uZ1-we-AuM"/>
                         <outlet property="totalMiss" destination="lqb-Ek-pha" id="rnN-Aq-WrR"/>
                     </connections>
