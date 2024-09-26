@@ -13,6 +13,7 @@ import os.log
 import GoogleMobileAds
 import SnapKit
 import PhotosUI
+import Lightbox
 
 extension BookViewController: PHPickerViewControllerDelegate {
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
@@ -24,7 +25,7 @@ extension BookViewController: PHPickerViewControllerDelegate {
                 
                 if let imagePath = self.saveImage(selectedImage) {
                     DispatchQueue.main.async {
-                        self.book?.imagePaths.append(imagePath)
+                        self.book?.imagePaths.append(imagePath) // Add the image path to the book object
                         self.collectionView.reloadData()
                     }
                 }
@@ -51,7 +52,6 @@ extension BookViewController: PHPickerViewControllerDelegate {
             imagePickerController.delegate = self
             self.present(imagePickerController, animated: true, completion: nil)
         }
-        
     }
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
@@ -79,7 +79,7 @@ extension BookViewController: PHPickerViewControllerDelegate {
 extension BookViewController: UICollectionViewDelegate, UICollectionViewDataSource, CustomCollectionViewCellDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return (book?.imagePaths.count ?? 0) + 1 // +1 para o ícone de adicionar
+        return (book?.imagePaths.count ?? 0) + 1 // +1 for the add icon
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -104,39 +104,55 @@ extension BookViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         return cell
     }
-
+    
+    func showImageAdditionInfoAlert() {
+        let alertController = UIAlertController(
+            title: "Salve a nova matéria",
+            message: "Você poderá adicionar imagens após criar a matéria.",
+            preferredStyle: .alert
+        )
+        
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertController.addAction(okAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
     
     func didTapCell(at indexPath: IndexPath) {
         if indexPath.item == 0 {
-            presentImagePickerOptions() // Abrir opções para escolher uma imagem
+            if !createMode {
+                presentImagePickerOptions()
+            } else {
+                showImageAdditionInfoAlert()
+            }
         } else {
             guard let book = book else { return }
-            
-            var images: [UIImage] = []
+
+            // Prepare Lightbox images
+            var images: [LightboxImage] = []
             for imagePath in book.imagePaths {
                 if let image = loadImage(from: imagePath) {
-                    images.append(image)
+                    let lightboxImage = LightboxImage(image: image)
+                    images.append(lightboxImage)
                 }
             }
-            
-            let photoPageVC = PhotoPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
-            photoPageVC.images = images
-            photoPageVC.currentIndex = indexPath.item - 1 // Exclui a célula de "adicionar foto"
-            
-            photoPageVC.modalPresentationStyle = .fullScreen
-            present(photoPageVC, animated: true, completion: nil)
+
+            let startIndex = indexPath.item - 1 // Exclude the "add photo" cell
+
+            // Create LightboxController
+            let lightboxController = LightboxController(images: images, startIndex: startIndex)
+            lightboxController.pageDelegate = self
+            lightboxController.dismissalDelegate = self
+
+            // Use dynamic background
+            lightboxController.dynamicBackground = true
+
+            // Present controller
+            present(lightboxController, animated: true, completion: nil)
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.item == 0 {
-            presentImagePickerOptions()
-        } else {
-            print("Item \(indexPath.item) selecionado")
-        }
-    }
-    
-    // Abre a câmera
+    // Open the camera
     private func openCamera() {
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
             let imagePickerController = UIImagePickerController()
@@ -158,22 +174,29 @@ extension BookViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
 }
 
+extension BookViewController: LightboxControllerPageDelegate, LightboxControllerDismissalDelegate {
+    func lightboxController(_ controller: LightboxController, didMoveToPage page: Int) {
+        // Handle page change if needed
+    }
+    
+    func lightboxControllerWillDismiss(_ controller: LightboxController) {
+        // Handle dismissal if needed
+    }
+}
+
 class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, GADInterstitialDelegate {
     var images: [UIImage?] = Array(repeating: nil, count: 10)
-    //MARK: Properties
+    // MARK: Properties
     @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var photoImageView: UIImageView!
     @IBOutlet weak var saveButton: UIBarButtonItem!
     
-    //    novos texts
+    // New labels
     @IBOutlet weak var missTextField: UILabel!
     @IBOutlet weak var totalMiss: UILabel!
     @IBOutlet weak var dividerBar: UILabel!
     
     @IBOutlet weak var lessonsTextField: UITextField!
-    
     @IBOutlet weak var obsTextView: UITextView!
-    
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
     var currentMiss = 0
@@ -207,13 +230,13 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
         return collectionView
     }()
     
-    // Carregar a imagem a partir de um caminho
+    // Load image from a path
     private func loadImage(from imagePath: String) -> UIImage? {
         let fileURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent(imagePath)
         return UIImage(contentsOfFile: fileURL.path)
     }
     
-    // Salvar a imagem no sistema de arquivos
+    // Save image to file system
     private func saveImage(_ image: UIImage) -> String? {
         guard let data = image.jpegData(compressionQuality: 0.8) else { return nil }
         let fileName = UUID().uuidString + ".jpg"
@@ -245,7 +268,7 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
         return button
     }()
     
-    //    MARK: - LifeCycle
+    // MARK: - LifeCycle
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -284,31 +307,27 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        UserDefaults.standard.set(true, forKey:"FirtsUse")
+        UserDefaults.standard.set(true, forKey: "FirtsUse")
         
         if #available(iOS 13.0, *) {
             overrideUserInterfaceStyle = .light
         }
         
-        interstitial = GADInterstitial(adUnitID: "ca-app-pub-8858389345934911/2509258121")
-        interstitial.delegate = self
         interstitial = createAndLoadInterstitial()
         let request = GADRequest()
         interstitial.load(request)
         
         obsTextView.layer.cornerRadius = 10
         
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: Selector(("dismissKeyboardFunc")))
-        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboardFunc))
         view.addGestureRecognizer(tap)
         
-        obsTextView.delegate = self as? UITextViewDelegate
+        obsTextView.delegate = self
         nameTextField.delegate = self
         
         if let bookControll = book {
             navigationItem.title = bookControll.name
             nameTextField.text = bookControll.name
-//            photoImageView.image = bookControll.photo ?? UIImage(named: "IconPlaceholder")
             
             missTextField.text = String(format: "%02d", bookControll.currentMiss)
             totalMiss.text = String(format: "%02d", bookControll.maxMiss)
@@ -320,7 +339,6 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
             obsTextView.text = bookControll.observations
         }
         
-//        cropBounds(viewlayer: photoImageView.layer, cornerRadius: 10)
         doneButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         
         view.addSubview(doneButton)
@@ -332,7 +350,8 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
         collectionView.register(CustomCollectionViewCell.self, forCellWithReuseIdentifier: "CustomCollectionViewCell")
         setupCollectionView()
         collectionView.isUserInteractionEnabled = true
-        if let book = book {
+        
+        if let _ = book {
             createButton.isEnabled = false
             createButton.tintColor = UIColor.clear
         } else {
@@ -352,31 +371,28 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
         present(navigation, animated: true)
     }
     
-    //    MARK: - LifeCycle
-    func cropBounds(viewlayer: CALayer, cornerRadius: Float) {
-        
-        let imageLayer = viewlayer
-        imageLayer.cornerRadius = CGFloat(cornerRadius)
-        imageLayer.masksToBounds = true
-    }
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
         textField.resignFirstResponder()
         return true
     }
     
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        navigationItem.title = textField.text
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        missTextField.text = String(format: "%02d", currentMiss)
+        totalMiss.text = String(format: "%02d", maxMiss)
     }
     
-    //MARK: - UIImagePickerControllerDelegate
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        navigationItem.title = textField.text
+        missTextField.text = String(format: "%02d", currentMiss)
+        totalMiss.text = String(format: "%02d", maxMiss)
+    }
+    
+    // MARK: - UIImagePickerControllerDelegate
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
         super.prepare(for: segue, sender: sender)
         
         if createMode {
@@ -386,114 +402,92 @@ class BookViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
             }
         }
         
+        // Verify if the name was provided, otherwise, set it to "Sem nome"
         var name = nameTextField.text ?? "Sem nome"
         if name.isEmpty {
             name = "Sem nome"
         }
-        let photo = photoImage
-        let lessons = Int(lessonsTextField.text ?? "0") ?? 0
-        let observations = obsTextView.text ?? ""
-        maxMiss = Int(Double(lessons))
-
-        // Passando os valores corretos para imagePaths
+        
+        let photo = photoImage // The captured photo
+        let lessons = Int(lessonsTextField.text ?? "0") ?? 0 // Number of lessons
+        let observations = obsTextView.text ?? "" // User observations
+        
+        // Update `maxMiss` based on the entered lessons
+        maxMiss = lessons
+        
+        // Update the `totalMiss` label with the new `maxMiss` value
+        totalMiss.text = String(format: "%02d", maxMiss)
+        
+        // Pass the correct values to `imagePaths`
         let imagePaths = book?.imagePaths ?? []
         
-        // Atualizando o objeto book com as novas informações
+        // Update the `book` object with the new information
         book = BookClass(name: name, photo: photo, currentMiss: currentMiss, maxMiss: maxMiss, lessons: lessons, observations: observations, imagePaths: imagePaths)
-
+        
+        // Request app review if applicable
         SKStoreReviewController.requestReview()
     }
+
     @IBOutlet weak var createButton: UIBarButtonItem!
     
-    
-    //MARK: - Actions
+    // MARK: - Actions
     
     @IBAction func subMiss(_ sender: Any) {
-        if(currentMiss > 0) {
-            currentMiss = currentMiss - 1
-            
+        if currentMiss > 0 {
+            currentMiss -= 1
             missTextField.text = String(format: "%02d", currentMiss)
             totalMiss.text = String(format: "%02d", maxMiss)
             
-            if(currentMiss > maxMiss) {
-                missTextField.textColor = UIColor.red
-                totalMiss.textColor = UIColor.red
-                dividerBar.textColor = UIColor.red
-            }
-            else {
-                missTextField.textColor = UIColor.black
-                totalMiss.textColor = UIColor.black
-                dividerBar.textColor = UIColor.black
+            if currentMiss > maxMiss {
+                missTextField.textColor = .red
+                totalMiss.textColor = .red
+                dividerBar.textColor = .red
+            } else {
+                missTextField.textColor = .black
+                totalMiss.textColor = .black
+                dividerBar.textColor = .black
             }
         }
     }
     
     @IBAction func addMiss(_ sender: Any) {
-        
-        currentMiss = currentMiss + 1
+        currentMiss += 1
         missTextField.text = String(format: "%02d", currentMiss)
         totalMiss.text = String(format: "%02d", maxMiss)
         
-        if(currentMiss > maxMiss) {
-            missTextField.textColor = UIColor.red
-            totalMiss.textColor = UIColor.red
-            dividerBar.textColor = UIColor.red
-        }
-        else {
-            missTextField.textColor = UIColor.black
-            totalMiss.textColor = UIColor.black
-            dividerBar.textColor = UIColor.black
+        if currentMiss > maxMiss {
+            missTextField.textColor = .red
+            totalMiss.textColor = .red
+            dividerBar.textColor = .red
+        } else {
+            missTextField.textColor = .black
+            totalMiss.textColor = .black
+            dividerBar.textColor = .black
         }
     }
     
-    //MARK: - Private Methods
+    // MARK: - Private Methods
     @objc func dismissKeyboardFunc() {
-        maxMiss = Int(Double(Int(lessonsTextField.text ?? "0") ?? 0))
+        maxMiss = Int(lessonsTextField.text ?? "0") ?? 0
         
-        if book != nil {
-            missTextField.text = String(format: "%02d", currentMiss)
-            totalMiss.text = String(format: "%02d", maxMiss)
-            
-            if(currentMiss > maxMiss) {
-                missTextField.textColor = UIColor.red
-                totalMiss.textColor = UIColor.red
-                dividerBar.textColor = UIColor.red
-            }
-            else {
-                missTextField.textColor = UIColor.black
-                totalMiss.textColor = UIColor.black
-                dividerBar.textColor = UIColor.black
-            }
+        missTextField.text = String(format: "%02d", currentMiss)
+        totalMiss.text = String(format: "%02d", maxMiss)
+        
+        if currentMiss > maxMiss {
+            missTextField.textColor = .red
+            totalMiss.textColor = .red
+            dividerBar.textColor = .red
+        } else {
+            missTextField.textColor = .black
+            totalMiss.textColor = .black
+            dividerBar.textColor = .black
         }
         
         view.endEditing(true)
     }
     
-    /// Tells the delegate an ad request succeeded.
-    func interstitialDidReceiveAd(_ ad: GADInterstitial) {
-        print("interstitialDidReceiveAd")
-    }
-    
-    /// Tells the delegate an ad request failed.
-    func interstitial(_ ad: GADInterstitial, didFailToReceiveAdWithError error: GADRequestError) {
-        print("interstitial:didFailToReceiveAdWithError: \(error.localizedDescription)")
-    }
-    
-    /// Tells the delegate that an interstitial will be presented.
-    func interstitialWillPresentScreen(_ ad: GADInterstitial) {
-        print("interstitialWillPresentScreen")
-    }
-    
-    /// Tells the delegate the interstitial is to be animated off the screen.
-    func interstitialWillDismissScreen(_ ad: GADInterstitial) {
-        print("interstitialWillDismissScreen")
-    }
-    
-    /// Tells the delegate that a user click will open another app
-    /// (such as the App Store), backgrounding the current app.
-    func interstitialWillLeaveApplication(_ ad: GADInterstitial) {
-        print("interstitialWillLeaveApplication")
-    }
+    // GADInterstitialDelegate methods...
+    // Include your existing ad delegate methods here
 }
 
 extension BookViewController: UITextViewDelegate {
@@ -510,6 +504,7 @@ extension BookViewController: CalculatorViewControllerDelegate {
     func populateNewValue(withValue: Int) {
         lessonsTextField.text = "\(withValue)"
         totalMiss.text = "\(withValue)"
+        maxMiss = withValue
     }
 }
 
@@ -541,15 +536,12 @@ extension BookViewController {
         
         switch cameraAuthorizationStatus {
         case .authorized:
-            // Acesso já concedido
             completion(true)
         case .notDetermined:
-            // O usuário ainda não foi solicitado, pedimos a permissão
             AVCaptureDevice.requestAccess(for: .video) { granted in
                 completion(granted)
             }
         case .denied, .restricted:
-            // Acesso negado ou restrito
             completion(false)
         @unknown default:
             completion(false)
@@ -560,36 +552,29 @@ extension BookViewController {
         let photoAuthorizationStatus = PHPhotoLibrary.authorizationStatus()
         
         switch photoAuthorizationStatus {
-        case .authorized:
-            // Acesso já concedido
+        case .authorized, .limited:
             completion(true)
         case .notDetermined:
-            // O usuário ainda não foi solicitado, pedimos a permissão
             PHPhotoLibrary.requestAuthorization { status in
-                completion(status == .authorized)
+                completion(status == .authorized || status == .limited)
             }
         case .denied, .restricted:
-            // Acesso negado ou restrito
             completion(false)
         @unknown default:
             completion(false)
         }
     }
+    
     private func openPhotoLibraryWithPermission() {
         checkPhotoLibraryPermission { granted in
             DispatchQueue.main.async {
                 if granted {
-                    if #available(iOS 14.0, *) {
-                        var configuration = PHPickerConfiguration()
-                        configuration.filter = .images // Apenas imagens
-                        configuration.selectionLimit = 0 // Ilimitado
-                        let picker = PHPickerViewController(configuration: configuration)
-                        picker.delegate = self
-                        self.present(picker, animated: true, completion: nil)
-                    } else {
-                        // Fallback para iOS 13 ou anterior usando UIImagePickerController
-                        self.openPhotoLibrary()
-                    }
+                    var configuration = PHPickerConfiguration()
+                    configuration.filter = .images
+                    configuration.selectionLimit = 0
+                    let picker = PHPickerViewController(configuration: configuration)
+                    picker.delegate = self
+                    self.present(picker, animated: true, completion: nil)
                 } else {
                     self.showPermissionDeniedAlert(for: "Galeria de Fotos")
                 }

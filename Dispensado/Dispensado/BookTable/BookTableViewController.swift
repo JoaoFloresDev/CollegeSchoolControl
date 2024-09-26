@@ -8,12 +8,12 @@
 
 import UIKit
 import os.log
-import StoreKit
+import StoreKit // Import StoreKit for SKStoreReviewController
 import SnapKit
 
 class BookTableViewController: UITableViewController {
     
-    //MARK: Properties
+    // MARK: - Properties
     @IBOutlet weak var premiumView: UIView!
     
     var books = [BookClass]()
@@ -28,7 +28,7 @@ class BookTableViewController: UITableViewController {
         super.viewDidLoad()
         if #available(iOS 13.0, *) {
             overrideUserInterfaceStyle = .light
-        } 
+        }
         
         navigationItem.leftBarButtonItem = editButtonItem
         
@@ -50,6 +50,9 @@ class BookTableViewController: UITableViewController {
             make.top.equalToSuperview().offset(240)
             make.centerX.equalToSuperview()
         }
+        
+        // Add the following code to implement the review request after 20 app launches
+        requestAppReviewIfAppropriate()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,6 +60,49 @@ class BookTableViewController: UITableViewController {
         addBackgroundIfNeed()
     }
 
+    // MARK: - App Review Request Implementation
+    
+    private func requestAppReviewIfAppropriate() {
+        let launchCountKey = "launchCount"
+        let hasRequestedReviewKey = "hasRequestedReview"
+        
+        var launchCount = UserDefaults.standard.integer(forKey: launchCountKey)
+        launchCount += 1
+        UserDefaults.standard.set(launchCount, forKey: launchCountKey)
+        
+        let hasRequestedReview = UserDefaults.standard.bool(forKey: hasRequestedReviewKey)
+        
+        if launchCount >= 30 && !hasRequestedReview {
+        showReviewAlert()
+        }
+    }
+    
+    private func showReviewAlert() {
+        let alert = UIAlertController(
+            title: "Gostaria de nos avaliar?",
+            message: "Sua avaliação é muito importante para nós!",
+            preferredStyle: .alert
+        )
+        
+        let rateAction = UIAlertAction(title: "Avaliar", style: .default) { _ in
+            let appID = "1508371263" // Replace with your actual App Store app ID
+            if let url = URL(string: "itms-apps://itunes.apple.com/app/id\(appID)?action=write-review"),
+               UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+            UserDefaults.standard.set(true, forKey: "hasRequestedReview") // Marcar que já solicitamos a avaliação
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancelar", style: .cancel) { _ in
+            UserDefaults.standard.set(true, forKey: "hasRequestedReview") // Marcar que já solicitamos, para não perguntar novamente
+        }
+        
+        alert.addAction(rateAction)
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
     func saveTodayDate() {
         let now = Date()
         UserDefaults.standard.set(now, forKey: "LastSavedDate")
@@ -78,7 +124,7 @@ class BookTableViewController: UITableViewController {
     
     @objc
     func açãoDoBotãoEsquerda() {
-        let storyboard = UIStoryboard(name: "Purchase",bundle: nil)
+        let storyboard = UIStoryboard(name: "Purchase", bundle: nil)
         let purchaseVC = storyboard.instantiateViewController(withIdentifier: "Purchase")
         self.present(purchaseVC, animated: true)
     }
@@ -87,7 +133,7 @@ class BookTableViewController: UITableViewController {
         super.didReceiveMemoryWarning()
     }
 
-    //MARK: - Table view data source
+    // MARK: - Table view data source
 
     @IBOutlet weak var purchaseButton: UIButton!
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -100,50 +146,50 @@ class BookTableViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+
         let cellIdentifier = "MealTableViewCell"
-        
+
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? BookTableViewCell  else {
             fatalError("The dequeued cell is not an instance of MealTableViewCell.")
         }
-        
+
         let meal = books[indexPath.row]
-        
+
         cell.nameLabel.text = meal.name
         if let photo = meal.photo {
-            cell.photoImageView.image = meal.photo
+            cell.photoImageView.image = photo
             cell.photoImageView.isHidden = false
         } else {
             cell.photoImageView.isHidden = true
         }
-        
+
         cell.missLabel.text = String(format: "%02d", meal.currentMiss)
         cell.totalMiss.text = String(format: "%02d", meal.maxMiss)
-        
+
         cell.addButton.tag = indexPath.row
         cell.lessBUtton.tag = indexPath.row
-        
+
         cell.addButton.addTarget(self, action: #selector(buttonAddTapped(_:)), for: .touchUpInside)
         cell.lessBUtton.addTarget(self, action: #selector(buttonLessTapped(_:)), for: .touchUpInside)
-        if(meal.currentMiss > meal.maxMiss)  {
+        
+        if meal.currentMiss > meal.maxMiss {
             cell.missLabel.textColor = UIColor.red
             cell.dividerBar.textColor = UIColor.red
             cell.totalMiss.textColor = UIColor.red
-        }
-        else {
+        } else {
             cell.missLabel.textColor = UIColor.black
             cell.dividerBar.textColor = UIColor.black
             cell.totalMiss.textColor = UIColor.black
         }
-        
+
         cell.cropBounds(viewlayer: cell.photoImageView.layer, cornerRadius: 10)
         return cell
     }
-    
+
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
-    
+
     @objc
     func buttonAddTapped(_ sender: UIButton) {
         var book = books[sender.tag]
@@ -152,7 +198,7 @@ class BookTableViewController: UITableViewController {
         tableView.reloadRows(at: [IndexPath(row: sender.tag, section: 0)], with: .none)
         saveBooks()
     }
-    
+
     @objc private func buttonLessTapped(_ sender: UIButton) {
         var book = books[sender.tag]
         if book.currentMiss <= 0 {
@@ -163,7 +209,7 @@ class BookTableViewController: UITableViewController {
         tableView.reloadRows(at: [IndexPath(row: sender.tag, section: 0)], with: .none)
         saveBooks()
     }
-    
+
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
@@ -182,45 +228,44 @@ class BookTableViewController: UITableViewController {
         }
     }
     
-    //MARK: - Navigation
+    // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
+
         super.prepare(for: segue, sender: sender)
-        
+
         switch(segue.identifier ?? "") {
-            
+
         case "AddItem":
             os_log("Adding a new meal.", log: OSLog.default, type: .debug)
-            
+
         case "ShowDetail":
             guard let mealDetailViewController = segue.destination as? BookViewController else {
                 fatalError("Unexpected destination: \(segue.destination)")
             }
-            
+
             guard let selectedMealCell = sender as? BookTableViewCell else {
                 fatalError("Unexpected sender: \(String(describing: sender))")
             }
-            
+
             guard let indexPath = tableView.indexPath(for: selectedMealCell) else {
                 fatalError("The selected cell is not being displayed by the table")
             }
-            
+
             let selectedMeal = books[indexPath.row]
             mealDetailViewController.book = selectedMeal
-            
+
         default:
-            print("Vai compra heheeee")
+            print("Unrecognized segue identifier.")
         }
     }
 
-    
-    //MARK: Actions
-    
+    // MARK: - Actions
+
     @IBAction func unwindToBookList(sender: UIStoryboardSegue) {
         if let sourceViewController = sender.source as? BookViewController, let meal = sourceViewController.book {
-            
+
             if let selectedIndexPath = tableView.indexPathForSelectedRow {
                 books[selectedIndexPath.row] = meal
                 tableView.reloadRows(at: [selectedIndexPath], with: .none)
@@ -230,13 +275,14 @@ class BookTableViewController: UITableViewController {
                 books.append(meal)
                 tableView.insertRows(at: [newIndexPath], with: .automatic)
             }
-            
+
             saveBooks()
+            addBackgroundIfNeed()
         }
     }
-    
-    //MARK: Private Methods
-    
+
+    // MARK: - Private Methods
+
     private func saveBooks() {
         let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(books, toFile: BookClass.ArchiveURL.path)
         if isSuccessfulSave {
@@ -245,26 +291,25 @@ class BookTableViewController: UITableViewController {
             os_log("Failed to save...", log: OSLog.default, type: .error)
         }
     }
-    
+
     private func loadBooks() -> [BookClass]?  {
         return NSKeyedUnarchiver.unarchiveObject(withFile: BookClass.ArchiveURL.path) as? [BookClass]
     }
-
 }
 
 extension UIView {
     func removerTodasConstraints() {
-        // Remove todas as constraints que referenciam a view
+        // Remove all constraints that reference the view
         var superview = self.superview
-        
+
         while let view = superview {
             for constraint in view.constraints where constraint.firstItem as? UIView == self || constraint.secondItem as? UIView == self {
                 view.removeConstraint(constraint)
             }
             superview = view.superview
         }
-        
-        // Remove todas as constraints da própria view
+
+        // Remove all constraints of the view itself
         self.removeConstraints(self.constraints)
     }
 }

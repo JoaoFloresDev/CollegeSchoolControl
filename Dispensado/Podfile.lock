@@ -1,4 +1,5 @@
 PODS:
+  - Cache (6.0.0)
   - Google-Mobile-Ads-SDK (7.58.0):
     - GoogleAppMeasurement (~> 6.0)
   - GoogleAppMeasurement (6.5.0):
@@ -30,6 +31,10 @@ PODS:
   - ImageSlideshow/SDWebImage (1.9.2):
     - ImageSlideshow/Core
     - SDWebImage (>= 3.7)
+  - Imaginary (5.0.0):
+    - Cache (~> 6.0.0)
+  - Lightbox (2.5.0):
+    - Imaginary (~> 5.0.0)
   - nanopb (1.30905.0):
     - nanopb/decode (= 1.30905.0)
     - nanopb/encode (= 1.30905.0)
@@ -45,29 +50,36 @@ DEPENDENCIES:
   - Google-Mobile-Ads-SDK
   - ImageSlideshow (~> 1.8)
   - ImageSlideshow/SDWebImage
+  - Lightbox
   - SnapKit
 
 SPEC REPOS:
   trunk:
+    - Cache
     - Google-Mobile-Ads-SDK
     - GoogleAppMeasurement
     - GoogleUtilities
     - ImageSlideshow
+    - Imaginary
+    - Lightbox
     - nanopb
     - PromisesObjC
     - SDWebImage
     - SnapKit
 
 SPEC CHECKSUMS:
+  Cache: 4ca7e00363fca5455f26534e5607634c820ffc2d
   Google-Mobile-Ads-SDK: 7052557293c75c676db55feb707ace9b790f32c1
   GoogleAppMeasurement: 4c644d86835d827bab30ab6aabb9ecaf1f500735
   GoogleUtilities: 39530bc0ad980530298e9c4af8549e991fd033b1
   ImageSlideshow: be305b54eaf2b2cfc7a7141c7c734605d44dc07d
+  Imaginary: cf5e3a7dd6ab1dcbd47ba8ce5edf2307c4e99eb3
+  Lightbox: cc3d5124f024fa8197fd23f913160db1c61a1852
   nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
   SDWebImage: 8a6b7b160b4d710e2a22b6900e25301075c34cb3
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
 
-PODFILE CHECKSUM: 4ff5a66e23e4468f5a42584c4e04dfbed61de1ca
+PODFILE CHECKSUM: 8349a97c09f6a06527fe46016ea38d6174e42670
 
 COCOAPODS: 1.15.2

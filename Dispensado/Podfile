@@ -11,6 +11,9 @@ target 'College' do
   pod 'SnapKit' 
 pod 'ImageSlideshow', '~> 1.8'
 pod 'ImageSlideshow/SDWebImage'  # Para suporte a imagens remotas
+pod 'Lightbox'
+
+
 
 
   target 'CollegeTests' do
